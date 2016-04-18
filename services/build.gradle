@@ -1,0 +1,67 @@
+plugins {
+    id "org.akhikhl.gretty" version "1.2.4"
+}
+
+apply plugin: "war"
+apply plugin: "org.akhikhl.gretty"
+
+sourceCompatibility = property("java.version")
+version = '0.1'
+
+dependencies {
+	
+	repositories {
+		jcenter()
+		mavenCentral()
+	}
+	
+    // Spring dependencies
+    ['spring-core',
+     'spring-web',
+     'spring-webmvc',
+     'spring-beans',
+     'spring-jdbc',
+     'spring-orm',
+     'spring-tx'].each { compile("org.springframework:$it:4.2.5.RELEASE") {
+        exclude module: 'commons-logging'
+    } }
+
+    // Jackson
+    ['jackson-core', 'jackson-databind'].each { compile "com.fasterxml.jackson.core:$it:2.5.4" }
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.5.4'
+
+    // Servlet API
+    providedCompile "javax.servlet:javax.servlet-api:3.+"
+
+    // JUnit
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    // Logging
+    compile 'org.slf4j:slf4j-api:1.7.12'
+    compile 'ch.qos.logback:logback-classic:1.1.3'
+    compile 'org.slf4j:jcl-over-slf4j:1.7.12'
+    compile 'org.slf4j:slf4j-log4j12:1.7.12'
+    compile 'log4j:log4j:1.2.17'
+
+    // Morphia
+    compile 'org.mongodb.morphia:morphia:1.0.1'
+
+}
+
+compileJava {
+	options.encoding = 'utf-8'
+}
+
+gretty {
+	contextPath = ''
+	servletContainer = 'jetty9'
+}
+
+task insertSeedData(type: Exec) {
+    executable "cmd"
+    args "/k", "mongoimport --jsonArray --db workoutlog --collection exercises --file src/main/resources/exercises.json"
+}
+
+gretty {
+    managedClassReload = false
+}
