@@ -1,7 +1,6 @@
 package com.jrew.lab.workoutlog.common.util.serializer;
 
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.jrew.lab.workoutlog.common.model.i18n.MultiLingualString;
@@ -18,7 +17,7 @@ public class MultiLingualStringSerializer extends JsonSerializer<MultiLingualStr
 
     @Override
     public void serialize(MultiLingualString multiLingualString, final JsonGenerator jsonGenerator,
-                          SerializerProvider serializers) throws IOException, JsonProcessingException {
+                          SerializerProvider serializers) throws IOException {
 
 
         Locale locale = LocaleContextHolder.getLocale();

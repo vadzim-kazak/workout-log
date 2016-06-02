@@ -1,15 +1,14 @@
 package com.jrew.lab.workoutlog.exercise.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.jrew.lab.workoutlog.exercise.model.Exercise;
 import com.jrew.lab.workoutlog.common.model.jackson.Views;
+import com.jrew.lab.workoutlog.exercise.model.Exercise;
 import com.jrew.lab.workoutlog.exercise.service.ExerciseProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -25,8 +24,12 @@ public class ExerciseController {
 
     @JsonView(value = Views.ExerciseFull.class)
     @RequestMapping(method = RequestMethod.GET)
-    public Set<Exercise> getAllExercises() {
+    public Set<Exercise> getAllExercises(@RequestParam(value = "lang", required = false)String language) {
 
+        if (language != null) {
+            Locale locale = new Locale(language);
+            LocaleContextHolder.setLocale(locale);
+        }
         return exerciseProvider.getAllExercises();
     }
 
