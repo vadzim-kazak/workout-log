@@ -11,6 +11,10 @@
 }
 
 .ExerciseItemHeader {
+    @include element(name) {
+       white-space: normal;    
+    }
+    
     @include element(favorite) {
         font-size: 2rem;
     }
