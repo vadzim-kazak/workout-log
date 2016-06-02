@@ -1,0 +1,10 @@
+.Chars {
+    @include element(icon){
+        color:  color($colors, primary);
+    }
+    
+    @include element(note){
+        color:  color($colors, primary);
+        max-width: 60%;
+    }
+}

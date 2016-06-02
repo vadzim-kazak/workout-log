@@ -1,0 +1,35 @@
+<ion-card class="ExerciseItem" (click)=exerciseOnClick(exercise)>
+    
+    <ion-card-header class="ExerciseItem-header">
+        <ion-row>
+            <ion-col>
+                {{exercise.name}}
+            </ion-col>
+            <ion-col text-right>
+                <ion-icon name='star-outline' class="ExerciseItemHeader-favorite" inactive></ion-icon>
+            </ion-col>
+        </ion-row>
+    </ion-card-header>
+    
+    <ion-row no-padding>
+        <ion-col>
+            <button clear small>
+            <ion-icon name='body'></ion-icon>
+            {{exercise.mainMuscles | normalize}}
+            </button>
+        </ion-col>
+        <ion-col text-center>
+            <button clear small>
+            <ion-icon name='walk'></ion-icon>
+            {{exercise.type | normalize}}       
+            </button>
+        </ion-col>
+        <ion-col text-right>
+            <button clear small>
+            <ion-icon name='man'></ion-icon>
+            {{exercise.mechanics | normalize }}            
+            </button>
+        </ion-col>
+    </ion-row>
+    
+</ion-card>

@@ -1,0 +1,11 @@
+
+<ion-navbar *navbar>
+  <ion-title>{{exercise.name}}</ion-title>
+</ion-navbar>
+
+<ion-content>
+     <ion-list no-border>
+        <exercise-chars [exercise]="exercise"></exercise-chars>
+        <exercise-steps [exercise]="exercise"></exercise-steps>
+     </ion-list>         
+</ion-content>    

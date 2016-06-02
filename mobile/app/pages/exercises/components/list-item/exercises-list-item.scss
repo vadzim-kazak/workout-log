@@ -1,0 +1,17 @@
+.ExerciseItem {
+    @include element(category) {
+         color:  color($colors, primary);         
+    }
+    
+    @include element(header) {
+        background: grey;
+        color: white; 
+        padding: 8px;      
+    }
+}
+
+.ExerciseItemHeader {
+    @include element(favorite) {
+        font-size: 2rem;
+    }
+}

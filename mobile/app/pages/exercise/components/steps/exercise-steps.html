@@ -1,0 +1,7 @@
+<ion-list-header>
+    Steps
+</ion-list-header>
+        
+<ion-item *ngFor="let step of exercise.description.steps; let i = index"> 
+    <p class="ExerciseStep"><b>{{i + 1}}.</b> {{step}}</p>
+</ion-item> 

@@ -1,0 +1,35 @@
+<ion-list-header>
+    Characteristics
+</ion-list-header>     
+
+<ion-item>
+    <ion-icon name='body' item-left class="Chars-icon"></ion-icon>
+        Target muscle
+    <ion-note item-right class="Chars-note">
+        {{exercise.mainMuscles | normalize}}
+    </ion-note>
+</ion-item>
+
+<ion-item *ngIf="checkOtherMuscles()">
+    <ion-icon name='body' item-left class="Chars-icon"></ion-icon>
+        Other muscles
+    <ion-note item-right class="Chars-note">
+        {{exercise.otherMuscles | normalize}}
+    </ion-note>
+</ion-item>
+
+<ion-item *ngIf="exercise.type">
+    <ion-icon name='walk' item-left class="Chars-icon"></ion-icon>
+        Type
+    <ion-note item-right class="Chars-note">
+        {{exercise.type | normalize}}
+    </ion-note>
+</ion-item>
+
+<ion-item *ngIf="exercise.mechanics">
+    <ion-icon name='man' item-left class="Chars-icon"></ion-icon>
+        Mechanics
+    <ion-note item-right class="Chars-note">
+        {{exercise.mechanics | normalize}}
+    </ion-note>
+</ion-item>

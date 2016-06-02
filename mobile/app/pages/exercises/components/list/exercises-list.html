@@ -1,0 +1,14 @@
+<ion-content>
+  <ion-list [virtualScroll]="exercises | async" *ngIf="(exercises | async).length > 0" 
+            [headerFn]="exerciseGroupHeader" class="ExercisesList" no-lines>
+        
+        <ion-item-divider *virtualHeader="let header" light>
+          <b class="ExercisesList-category">{{header | normalize | uppercase }}</b>
+        </ion-item-divider>
+        
+        <ion-item *virtualItem="let exercise">
+          <exercises-list-item [exercise]="exercise"></exercises-list-item>  
+        </ion-item>
+
+  </ion-list>
+</ion-content>

@@ -6,6 +6,7 @@ import com.jrew.lab.workoutlog.common.model.jackson.Views;
 import com.jrew.lab.workoutlog.exercise.service.ExerciseProvider;
 import com.jrew.lab.workoutlog.workout.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,8 @@ import java.util.List;
  * Created by Kazak_VV on 08.06.2015.
  */
 @RestController
-@RequestMapping(value = "/api/workouts")
+@CrossOrigin
+@RequestMapping(value = "/api/v1/workouts")
 public class WorkoutController {
 
     @Autowired

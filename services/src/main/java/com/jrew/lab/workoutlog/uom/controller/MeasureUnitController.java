@@ -8,10 +8,7 @@ import com.jrew.lab.workoutlog.uom.model.SystemOfUnits;
 import com.jrew.lab.workoutlog.uom.service.MeasureUnitProvider;
 import com.jrew.lab.workoutlog.common.util.CommonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Optional;
@@ -21,7 +18,8 @@ import java.util.Set;
  * Created by Kazak_VV on 16.06.2015.
  */
 @RestController
-@RequestMapping(value = "/api/measures")
+@CrossOrigin
+@RequestMapping(value = "/api/v1/measures")
 public class MeasureUnitController {
 
     @Autowired

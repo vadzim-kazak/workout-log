@@ -1,0 +1,5 @@
+.ExercisesList {
+   @include element(category) {
+        color:  color($colors, primary);         
+   }
+}
