@@ -1,7 +1,7 @@
 import {Input, Output, EventEmitter, Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {Observable} from 'rxjs';
-import {NavController} from 'ionic-angular';
+import {NavController, Modal} from 'ionic-angular';
 import {Exercise} from '../../../exercise/exercise';
 
 @Component({
@@ -16,7 +16,9 @@ export class ExercisesListItem {
   constructor(private navController: NavController) {}
   
   exerciseOnClick(exercise) {
-     this.navController.push(Exercise, {exercise});
+     
+     let modal = Modal.create(Exercise, {exercise});
+     this.navController.present(modal);
   }
   
 }

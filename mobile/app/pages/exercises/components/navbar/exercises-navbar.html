@@ -9,19 +9,20 @@
     </div>
     
     <!-- Search inactive state -->
-    <ion-buttons *ngIf="!isSearchActive" left>
-        <button menuToggle>
-            <ion-icon name='menu'></ion-icon>
-        </button>
-    </ion-buttons>  
-    <ion-title *ngIf="!isSearchActive">{{'NAVBAR_TITLE_EXERCISES' | translate}}</ion-title>          
-    <ion-buttons *ngIf="!isSearchActive" end>
+    <button *ngIf="!isSearchActive" menuToggle left>
+        <ion-icon name='menu'></ion-icon>
+    </button>   
+   
+    <ion-title *ngIf="!isSearchActive">{{'NAVBAR_APP_NAME' | translate}}</ion-title>  
+    
+    <ion-buttons *ngIf="!isSearchActive" end>    
         <button (click)="toggleSearchMode()">
             <ion-icon name='search'></ion-icon>
-        </button>   
-        <!--<button>
-            <ion-icon name='settings'></ion-icon>
-        </button>-->
+        </button>    
     </ion-buttons>
+
+    <button *ngIf="!isSearchActive" menuToggle right>
+        <ion-icon name='options'></ion-icon>
+    </button>        
         
 </ion-navbar>

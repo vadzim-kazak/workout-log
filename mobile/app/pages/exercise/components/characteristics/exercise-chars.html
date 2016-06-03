@@ -3,7 +3,7 @@
 </ion-list-header>     
 
 <ion-item>
-    <ion-icon name='body' item-left class="Chars-icon"></ion-icon>
+    <ion-icon name='man' item-left class="Chars-icon"></ion-icon>
         {{'EXERCISE_TARGET_MUSCLES' | translate | normalize}}
     <ion-note item-right class="Chars-note" text-right>
         <span *ngFor="let muscle of exercise.mainMuscles; let last=last">
@@ -13,7 +13,7 @@
 </ion-item>
 
 <ion-item *ngIf="checkOtherMuscles()">
-    <ion-icon name='body' item-left class="Chars-icon"></ion-icon>
+    <ion-icon name='man' item-left class="Chars-icon"></ion-icon>
         {{'EXERCISE_OTHER_MUSCLES' | translate | normalize}}
     <ion-note item-right class="Chars-note" text-right>
         <span *ngFor="let muscle of exercise.otherMuscles; let last=last">
@@ -31,7 +31,7 @@
 </ion-item>
 
 <ion-item *ngIf="exercise.mechanics">
-    <ion-icon name='man' item-left class="Chars-icon"></ion-icon>
+    <ion-icon name='body' item-left class="Chars-icon"></ion-icon>
          {{'EXERCISE_MECHANICS' | translate | normalize}}
     <ion-note item-right class="Chars-note">
         {{'MECHANICS_' + exercise.mechanics | translate | normalize}}

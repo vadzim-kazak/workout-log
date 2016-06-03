@@ -1,8 +1,15 @@
 <ion-tabs selectedIndex="1">
-  <ion-tab [root]="tab1Root" [tabTitle]="'TAB_TITLE_WORKOUTS' | translate" tabIcon="calendar"></ion-tab>
-  <ion-tab [root]="tab2Root" [tabTitle]="'TAB_TITLE_EXERCISES' | translate" #exercisesFilter tabIcon="list"></ion-tab>
-  <ion-tab [root]="tab3Root" [tabTitle]="'TAB_TITLE_STATS' | translate" tabIcon="analytics"></ion-tab>
+  <ion-tab [root]="tab1Root" [tabTitle]="'TAB_TITLE_WORKOUTS' | translate" #workouts tabIcon="calendar"></ion-tab>
+  <ion-tab [root]="tab2Root" [tabTitle]="'TAB_TITLE_EXERCISES' | translate" #exercises tabIcon="list"></ion-tab>
+  <ion-tab [root]="tab3Root" [tabTitle]="'TAB_TITLE_STATS' | translate" #stats tabIcon="analytics"></ion-tab>
 </ion-tabs>
+
+<ion-menu [content]="exercises" side="right">
+  <ion-content>
+    Content placeholder
+  </ion-content>
+</ion-menu>
+
 
 
 

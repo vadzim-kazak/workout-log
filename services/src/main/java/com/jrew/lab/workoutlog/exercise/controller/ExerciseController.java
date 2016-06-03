@@ -3,6 +3,7 @@ package com.jrew.lab.workoutlog.exercise.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.jrew.lab.workoutlog.common.model.jackson.Views;
 import com.jrew.lab.workoutlog.exercise.model.Exercise;
+import com.jrew.lab.workoutlog.exercise.model.Muscle;
 import com.jrew.lab.workoutlog.exercise.service.ExerciseProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -16,14 +17,14 @@ import java.util.Set;
  */
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/api/v1/exercises")
+@RequestMapping(value = "/api/v1")
 public class ExerciseController {
 
     @Autowired
     private ExerciseProvider exerciseProvider;
 
     @JsonView(value = Views.ExerciseFull.class)
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/exercises", method = RequestMethod.GET)
     public Set<Exercise> getAllExercises(@RequestParam(value = "lang", required = false)String language) {
 
         if (language != null) {
@@ -31,6 +32,11 @@ public class ExerciseController {
             LocaleContextHolder.setLocale(locale);
         }
         return exerciseProvider.getAllExercises();
+    }
+
+    @RequestMapping(value = "/muscles", method = RequestMethod.GET)
+    public Muscle[] getAllMuscles() {
+        return Muscle.values();
     }
 
 }
