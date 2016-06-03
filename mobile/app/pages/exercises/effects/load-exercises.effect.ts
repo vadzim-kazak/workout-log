@@ -15,7 +15,7 @@ export class ExercisesEffects {
   load$ = this.updates$
           // Listen for the 'LOAD_EXERCISES' action
           .whenAction('LOAD_EXERCISES')
-          .switchMap(payload => this.http.get('http://localhost:8080/api/v1/exercises?lang=ru')
+          .switchMap(payload => this.http.get('http://localhost:8080/api/v1/exercises?lang=' + this.translate.currentLang)
               // If successful, dispatch success action with result
               .map(res => ({ type: 'LOAD_EXERCISES_SUCCESS', payload: this.normalizeExercises(res.json()) }))
               // If request fails, dispatch failed action
@@ -46,7 +46,19 @@ export class ExercisesEffects {
             
             if(translatedFirst < translatedSecond) return -1;
             if(translatedFirst > translatedSecond) return 1;
-            return 0;
+            
+            if (translatedFirst === translatedSecond) {
+                
+                let firstMechanics = first.mechanics;
+                let secondMechanics = second.mechanics;
+                
+                // Compound before isolated
+                if (firstMechanics > secondMechanics) return 1;
+                if (firstMechanics < secondMechanics) return -1;
+                
+                return 0;
+            }
+            
         });
         
         return exercises;
