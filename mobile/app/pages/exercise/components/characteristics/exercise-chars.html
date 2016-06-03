@@ -1,35 +1,39 @@
 <ion-list-header>
-    Characteristics
+    {{'EXERCISE_CHARS' | translate | normalize}}
 </ion-list-header>     
 
 <ion-item>
     <ion-icon name='body' item-left class="Chars-icon"></ion-icon>
-        Target muscle
-    <ion-note item-right class="Chars-note">
-        {{exercise.mainMuscles | normalize}}
+        {{'EXERCISE_TARGET_MUSCLES' | translate | normalize}}
+    <ion-note item-right class="Chars-note" text-right>
+        <span *ngFor="let muscle of exercise.mainMuscles; let last=last">
+            {{muscle.toUpperCase() + '_SHORT' | translate | normalize}}{{!last ? ',' : ''}}    
+        </span>
     </ion-note>
 </ion-item>
 
 <ion-item *ngIf="checkOtherMuscles()">
     <ion-icon name='body' item-left class="Chars-icon"></ion-icon>
-        Other muscles
-    <ion-note item-right class="Chars-note">
-        {{exercise.otherMuscles | normalize}}
+        {{'EXERCISE_OTHER_MUSCLES' | translate | normalize}}
+    <ion-note item-right class="Chars-note" text-right>
+        <span *ngFor="let muscle of exercise.otherMuscles; let last=last">
+            {{muscle.toUpperCase() + '_SHORT' | translate | normalize}}{{!last ? ',' : ''}}    
+        </span>
     </ion-note>
 </ion-item>
 
 <ion-item *ngIf="exercise.type">
     <ion-icon name='walk' item-left class="Chars-icon"></ion-icon>
-        Type
+        {{'EXERCISE_TYPE' | translate | normalize}}
     <ion-note item-right class="Chars-note">
-        {{exercise.type | normalize}}
+        {{'TYPE_' + exercise.type | translate | normalize}}
     </ion-note>
 </ion-item>
 
 <ion-item *ngIf="exercise.mechanics">
     <ion-icon name='man' item-left class="Chars-icon"></ion-icon>
-        Mechanics
+         {{'EXERCISE_MECHANICS' | translate | normalize}}
     <ion-note item-right class="Chars-note">
-        {{exercise.mechanics | normalize}}
+        {{'MECHANICS_' + exercise.mechanics | translate | normalize}}
     </ion-note>
 </ion-item>

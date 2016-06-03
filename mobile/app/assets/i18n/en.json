@@ -1,0 +1,56 @@
+{
+    
+    "TAB_TITLE_WORKOUTS": "Workouts",
+    "TAB_TITLE_EXERCISES": "Exercises",
+    "TAB_TITLE_STATS": "Stats",
+    
+    "NAVBAR_TITLE_EXERCISES": "Exercises",
+    "NAVBAR_SEARCH_PLACEHOLDER": "Search",
+    
+    "TYPE_ANAEROBIC": "anaerobic",
+    "TYPE_AEROBIC": "aerobic",
+    "TYPE_FLEXIBILITY": "flexibility",
+    
+    "MECHANICS_COMPOUND": "compound",
+    "MECHANICS_ISOLATED": "isolated",
+    
+    "NECK": "neck",
+    "TRAPS": "traps",
+    "SHOULDERS": "shoulders",
+    "CHEST": "chest",
+    "TRICEPS": "triceps",
+    "BICEPS": "biceps",
+    "FOREARM": "forearm",
+    "LATS": "lats",
+    "MIDDLE_BACK": "middle back",
+    "LOWER_BACK": "lower back",
+    "ABS": "abs",
+    "GLUTES": "glutes",
+    "QUADS": "quads",
+    "HAMSTRINGS": "hamstrings",
+    "CALVES": "calves",
+    
+    "NECK_SHORT": "neck",
+    "TRAPS_SHORT": "traps",
+    "SHOULDERS_SHORT": "shoulders",
+    "CHEST_SHORT": "chest",
+    "TRICEPS_SHORT": "triceps",
+    "BICEPS_SHORT": "biceps",
+    "FOREARM_SHORT": "forearm",
+    "LATS_SHORT": "lats",
+    "MIDDLE_BACK_SHORT": "back",
+    "LOWER_BACK_SHORT": "back",
+    "ABS_SHORT": "abs",
+    "GLUTES_SHORT": "glutes",
+    "QUADS_SHORT": "quads",
+    "HAMSTRINGS_SHORT": "hamstrings",
+    "CALVES_SHORT": "calves",
+    
+    "EXERCISE_CHARS": "characteristics",
+    "EXERCISE_TARGET_MUSCLES": "target muscle",
+    "EXERCISE_OTHER_MUSCLES": "other muscles",
+    "EXERCISE_TYPE": "type",
+    "EXERCISE_MECHANICS": "mechanics",
+    "EXERCISE_STEPS": "steps"
+    
+}
