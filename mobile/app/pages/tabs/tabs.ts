@@ -2,11 +2,18 @@ import {Page} from 'ionic-angular';
 import {Page3} from '../page3/page3';
 import {Workouts} from '../workouts/workouts';
 import {Exercises} from '../exercises/exercises';
+import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Page({
-  templateUrl: 'build/pages/tabs/tabs.html'
+  templateUrl: 'build/pages/tabs/tabs.html',
+  pipes: [TranslatePipe]
 })
 export class TabsPage {
+  
+  constructor(private translate: TranslateService) {
+    console.log(translate.instant('TAB_TITLE_WORKOUTS'));  
+  }
+  
   // this tells the tabs component which Pages
   // should be each tab's root Page
   tab1Root: any = Workouts;

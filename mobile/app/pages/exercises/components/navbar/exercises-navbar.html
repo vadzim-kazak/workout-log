@@ -3,7 +3,8 @@
     <!-- Search active state -->
     <div *ngIf="isSearchActive">
         <ion-searchbar (input)="searchExercises.emit($event)"
-                       (cancel)="toggleSearchMode()"> 
+                       (cancel)="toggleSearchMode()"
+                       [placeholder]="'NAVBAR_SEARCH_PLACEHOLDER' | translate"> 
         </ion-searchbar>
     </div>
     
@@ -13,11 +14,14 @@
             <ion-icon name='menu'></ion-icon>
         </button>
     </ion-buttons>  
-    <ion-title *ngIf="!isSearchActive">Exercises</ion-title>          
+    <ion-title *ngIf="!isSearchActive">{{'NAVBAR_TITLE_EXERCISES' | translate}}</ion-title>          
     <ion-buttons *ngIf="!isSearchActive" end>
-    <button right (click)="toggleSearchMode()">
+        <button (click)="toggleSearchMode()">
             <ion-icon name='search'></ion-icon>
         </button>   
+        <!--<button>
+            <ion-icon name='settings'></ion-icon>
+        </button>-->
     </ion-buttons>
         
 </ion-navbar>

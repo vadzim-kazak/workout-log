@@ -1,8 +1,10 @@
 import {Input, Output, EventEmitter, Component} from '@angular/core';
+import {TranslatePipe} from 'ng2-translate/ng2-translate';
 
 @Component({
   selector: 'exercises-navbar',
   templateUrl: 'build/pages/exercises/components/navbar/exercises-navbar.html',
+  pipes: [TranslatePipe]
 })
 export class ExercisesNavbar {
     

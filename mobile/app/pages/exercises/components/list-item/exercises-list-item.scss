@@ -19,3 +19,13 @@
         font-size: 2rem;
     }
 }
+
+.ExerciseItemFooter {
+    @include element(chars) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;      
+    }
+}
+
+

@@ -4,6 +4,7 @@ import {Observable, Subject, Subscription} from 'rxjs';
 import {ChangeDetectionStrategy} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {StateUpdates} from '@ngrx/effects'
+import {TranslateService} from 'ng2-translate/ng2-translate';
 // Effects
 import {ExercisesEffects} from './effects/load-exercises.effect';
 // Reducers
@@ -31,7 +32,8 @@ export class Exercises {
   exercises: Observable<any>;
   exercisesEffectsSubscription: Subscription;
   
-  constructor(private store: Store<any>, exercisesEffects: ExercisesEffects, filteringSerivce: ExercisesFilteringService) {
+  constructor(private store: Store<any>, exercisesEffects: ExercisesEffects, 
+              filteringSerivce: ExercisesFilteringService) {
       
       this.exercises = Observable.combineLatest(store.select('exercises'), 
                                                 store.select('exercisesSearchQuery'), 

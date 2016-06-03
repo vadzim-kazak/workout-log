@@ -11,23 +11,17 @@
         </ion-row>
     </ion-card-header>
     
-    <ion-row no-padding>
-        <ion-col>
-            <button clear small>
-            <ion-icon name='body'></ion-icon>
-            {{exercise.mainMuscles | normalize}}
-            </button>
-        </ion-col>
-        <ion-col text-center>
-            <button clear small>
+    <ion-row no-padding wrap>
+        <ion-col *ngIf="exercise.type" text-left>
+            <button clear small class="ExerciseItemFooter-chars">
             <ion-icon name='walk'></ion-icon>
-            {{exercise.type | normalize}}       
+            {{'TYPE_' + exercise.type | translate}}       
             </button>
         </ion-col>
-        <ion-col text-right>
-            <button clear small>
+        <ion-col *ngIf="exercise.mechanics" text-right>
+            <button clear small class="ExerciseItemFooter-chars">
             <ion-icon name='man'></ion-icon>
-            {{exercise.mechanics | normalize }}            
+            {{'MECHANICS_' + exercise.mechanics | translate }}            
             </button>
         </ion-col>
     </ion-row>
