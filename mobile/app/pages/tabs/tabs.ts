@@ -4,9 +4,12 @@ import {Workouts} from '../workouts/workouts';
 import {Exercises} from '../exercises/exercises';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 
+import {ExercisesFilter} from '../exercises-filter/exercises-filter.component';
+
 @Page({
   templateUrl: 'build/pages/tabs/tabs.html',
-  pipes: [TranslatePipe]
+  pipes: [TranslatePipe],
+  directives: [ExercisesFilter]
 })
 export class TabsPage {
   

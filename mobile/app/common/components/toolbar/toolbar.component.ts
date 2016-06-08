@@ -8,6 +8,7 @@ import {ViewController} from 'ionic-angular';
 export class Toolbar {
     
     @Input() title: string;
+    @Input() showBackButton: boolean = true;
     
     constructor(private viewController: ViewController) {}
     

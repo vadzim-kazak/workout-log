@@ -1,5 +1,5 @@
 <ion-toolbar>
-    <ion-buttons left>
+    <ion-buttons left *ngIf="showBackButton">
         <button (click)="dismiss()">
             <ion-icon name="arrow-back"></ion-icon>
             <span showWhen="ios">Back</span>

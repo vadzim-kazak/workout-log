@@ -4,7 +4,10 @@
   <ion-tab [root]="tab3Root" [tabTitle]="'TAB_TITLE_STATS' | translate" #stats tabIcon="analytics"></ion-tab>
 </ion-tabs>
 
-
-
+<ion-menu [content]="exercisesTabRoot" side="right">
+   <ion-content>
+    <exercises-filter></exercises-filter>
+   </ion-content>      
+</ion-menu>
 
 

@@ -54,8 +54,7 @@
     
     "EXERCISES_FILTER_TOOLBAR_TITLE": "Фильтр упражнений",
     "EXERCISES_FILTER_MUSCLES": "Мышечная группа",
-    "EXERCISES_FILTER_TYPES": "Тип упраженения",
+    "EXERCISES_FILTER_TYPES": "Тип упражнения",
     "EXERCISES_FILTER_MECHANICS": "Механика выполнения",
-    "EXERCISES_FILTER_RESET": "Сбросить к начальным настройкам"
-
+    "EXERCISES_FILTER_RESET": "Сбросить"
 }

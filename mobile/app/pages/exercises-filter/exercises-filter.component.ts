@@ -9,7 +9,7 @@ import {NormalizePipe} from '../../common/pipes/normalize.pipe';
 // Reducers
 import {exercisesFilterReducer} from './reducers/exercises-filter.reducer';
 import {exercisesFilteringCriteriaReducer} from './reducers/exercises-filtering-criteria.reducer';
-import {exercisesFilterHeadersReducer} from './reducers/exercises-filter-headers.reducer';
+import {exercisesFilterCategoriesReducer} from './reducers/exercises-filter-categories.reducer';
 // Effects
 import {FilteringCriteriaEffects} from './effects/load-filtering-criteria.effect'; 
 //Components
@@ -19,7 +19,7 @@ import {FilterListItem} from './components/filter-list-item/filter-list-item.com
 export const reducers = {
     exercisesFilter: exercisesFilterReducer,
     exercisesFilteringCriteria: exercisesFilteringCriteriaReducer,
-    exercisesFilterHeaders: exercisesFilterHeadersReducer 
+    exercisesFilterCategories: exercisesFilterCategoriesReducer 
 }
 
 @Component({
@@ -31,24 +31,24 @@ export const reducers = {
 })
 export class ExercisesFilter {
     
-    exercisesFilteringCriteria: Observable<any>;
-    exercisesFilter;
-    categoryHeaders;
-    exercisesFilterSubscription: Subscription;
+    filterState;
+    filterCategoriesState;
+    filteringCriteria: Observable<any>;
+    filterStateSubscription: Subscription;
+    filterCategoriesStateSubscription:  Subscription;
     filteringCriteriaSubscription: Subscription;
-    categoryHeadersSubscription:  Subscription;
 
-    constructor(private viewController: ViewController, private store: Store<any>, filteringCriteriaEffects: FilteringCriteriaEffects){
-      this.exercisesFilteringCriteria = store.select('exercisesFilteringCriteria');
-      this.exercisesFilterSubscription = store.select('exercisesFilter').subscribe(value => this.exercisesFilter = value);
-      this.categoryHeadersSubscription = store.select('exercisesFilterHeaders').subscribe(state => this.categoryHeaders = state);
+    constructor(private viewController: ViewController, private store: Store<any>, filteringCriteriaEffects: FilteringCriteriaEffects) {
+      this.filteringCriteria = store.select('exercisesFilteringCriteria');
+      this.filterStateSubscription = store.select('exercisesFilter').subscribe(value => this.filterState = value);
+      this.filterCategoriesStateSubscription = store.select('exercisesFilterCategories').subscribe(state => this.filterCategoriesState = state);
 
       // Manually run effect subscription
       this.filteringCriteriaSubscription = filteringCriteriaEffects.load$.subscribe(store);
     }
     
     isFilterValueUnchecked(category, value) {
-        return this.exercisesFilter[category] && this.exercisesFilter[category].some(categoryValue => categoryValue === value);
+        return this.filterState[category] && this.filterState[category].some(categoryValue => categoryValue === value);
     }
 
     handleFilterCriterionUpdate($event) {
@@ -56,7 +56,7 @@ export class ExercisesFilter {
     }
 
     isCategoryHeaderUnchecked(category) {
-        return this.categoryHeaders[category];
+        return this.filterCategoriesState[category];
     }
     
     handleFilterCategoryHeaderUpdate($event) {
@@ -74,8 +74,8 @@ export class ExercisesFilter {
     }
 
     ngOnDestroy() {
-        this.exercisesFilterSubscription.unsubscribe();
-        this.categoryHeadersSubscription.unsubscribe();
+        this.filterStateSubscription.unsubscribe();
+        this.filterCategoriesStateSubscription.unsubscribe();
         // Manually unsubscribe effect
         this.filteringCriteriaSubscription.unsubscribe();
     }

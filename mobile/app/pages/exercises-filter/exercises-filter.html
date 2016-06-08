@@ -1,4 +1,4 @@
-<toolbar [title]="'EXERCISES_FILTER_TOOLBAR_TITLE' | translate"></toolbar>
+<toolbar [title]="'EXERCISES_FILTER_TOOLBAR_TITLE' | translate" [showBackButton]="false"></toolbar>
   
 <ion-content>
     
@@ -13,11 +13,11 @@
         
         <filter-list-header [title]="'EXERCISES_FILTER_TYPES' | translate"
                             [category]="'type'" 
-                            [values]="(exercisesFilteringCriteria | async).types"
+                            [values]="(filteringCriteria | async).types"
                             [isUnchecked]="isCategoryHeaderUnchecked('type')"
                             (filterCategoryUpdated)="handleFilterCategoryHeaderUpdate($event)"></filter-list-header>
 
-        <filter-list-item *ngFor="let type of (exercisesFilteringCriteria | async).types" 
+        <filter-list-item *ngFor="let type of (filteringCriteria | async).types" 
                           [label]="'TYPE_' + type | translate | normalize"
                           [value]="type"
                           [category]="'type'"
@@ -26,11 +26,11 @@
         
         <filter-list-header [title]="'EXERCISES_FILTER_MECHANICS' | translate"
                             [category]="'mechanics'" 
-                            [values]="(exercisesFilteringCriteria | async).mechanics"
+                            [values]="(filteringCriteria | async).mechanics"
                             [isUnchecked]="isCategoryHeaderUnchecked('mechanics')"
                             (filterCategoryUpdated)="handleFilterCategoryHeaderUpdate($event)"></filter-list-header>
 
-        <filter-list-item *ngFor="let mechanics of (exercisesFilteringCriteria | async).mechanics" 
+        <filter-list-item *ngFor="let mechanics of (filteringCriteria | async).mechanics" 
                           [label]="'MECHANICS_' + mechanics | translate | normalize"
                           [value]="mechanics"
                           [category]="'mechanics'"
@@ -39,11 +39,11 @@
        
         <filter-list-header [title]="'EXERCISES_FILTER_MUSCLES' | translate"
                             [category]="'mainMuscles'"
-                            [values]="(exercisesFilteringCriteria | async).muscles"
+                            [values]="(filteringCriteria | async).muscles"
                             [isUnchecked]="isCategoryHeaderUnchecked('mainMuscles')"
                             (filterCategoryUpdated)="handleFilterCategoryHeaderUpdate($event)"></filter-list-header>
 
-        <filter-list-item *ngFor="let muscle of (exercisesFilteringCriteria | async).muscles" 
+        <filter-list-item *ngFor="let muscle of (filteringCriteria | async).muscles" 
                           [label]="muscle | translate | normalize"
                           [value]="muscle"
                           [category]="'mainMuscles'"
