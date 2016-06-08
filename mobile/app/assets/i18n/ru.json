@@ -3,7 +3,7 @@
     "TAB_TITLE_EXERCISES": "Упражнения",
     "TAB_TITLE_STATS": "Статистика",
     
-    "NAVBAR_APP_NAME": "ЗОЖыч",
+    "NAVBAR_APP_NAME": "Workouts Log",
     "NAVBAR_SEARCH_PLACEHOLDER": "Поиск",
     
     "TYPE_ANAEROBIC": "анаэробное",
@@ -50,5 +50,12 @@
     "EXERCISE_OTHER_MUSCLES": "другие мышцы",
     "EXERCISE_TYPE": "тип нагрузки",
     "EXERCISE_MECHANICS": "механика",
-    "EXERCISE_STEPS": "шаги выполнения"
+    "EXERCISE_STEPS": "шаги выполнения",
+    
+    "EXERCISES_FILTER_TOOLBAR_TITLE": "Фильтр упражнений",
+    "EXERCISES_FILTER_MUSCLES": "Мышечная группа",
+    "EXERCISES_FILTER_TYPES": "Тип упраженения",
+    "EXERCISES_FILTER_MECHANICS": "Механика выполнения",
+    "EXERCISES_FILTER_RESET": "Сбросить к начальным настройкам"
+
 }

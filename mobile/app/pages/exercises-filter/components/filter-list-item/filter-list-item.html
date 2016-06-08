@@ -1,0 +1,4 @@
+<ion-item>
+    <ion-label>{{label}}</ion-label>
+    <ion-toggle #toggle [(ngModel)]="!isUnchecked" (click)="onClickHandler(toggle,value,category)"></ion-toggle>
+</ion-item>

@@ -51,6 +51,12 @@
     "EXERCISE_OTHER_MUSCLES": "other muscles",
     "EXERCISE_TYPE": "type",
     "EXERCISE_MECHANICS": "mechanics",
-    "EXERCISE_STEPS": "steps"
+    "EXERCISE_STEPS": "steps",
+    
+    "EXERCISES_FILTER_TOOLBAR_TITLE": "Exercises filter",
+    "EXERCISES_FILTER_MUSCLES": "Muscles",
+    "EXERCISES_FILTER_TYPES": "Exercises type",
+    "EXERCISES_FILTER_MECHANICS": "Mechanics",
+    "EXERCISES_FILTER_RESET": "Reset to default"
     
 }

@@ -2,12 +2,12 @@ import {Component, Input} from '@angular/core';
 import {ViewController} from 'ionic-angular';
 
 @Component({
-  selector:'exercise-toolbar',
-  templateUrl: 'build/pages/exercise/components/toolbar/exercise-toolbar.html'
+  selector: 'toolbar',
+  templateUrl: 'build/common/components/toolbar/toolbar.html'
 })
-export class ExerciseToolbar {
+export class Toolbar {
     
-    @Input() exercise;
+    @Input() title: string;
     
     constructor(private viewController: ViewController) {}
     

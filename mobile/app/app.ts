@@ -1,4 +1,4 @@
-import {App, Platform} from 'ionic-angular';
+import {Platform, App} from 'ionic-angular';
 import {provide} from '@angular/core';
 import {Http} from '@angular/http';
 import {TRANSLATE_PROVIDERS, TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader, MissingTranslationHandler} from 'ng2-translate/ng2-translate';
@@ -6,8 +6,10 @@ import {CommonMissingTranslationHandler} from './common/i18n/missing-translation
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {provideStore} from '@ngrx/store';
-import {reducers} from './pages/exercises/exercises';
-import {ExercisesEffects} from './pages/exercises/effects/load-exercises.effect';
+
+// Reducers
+import {reducers as ExercisesReducers} from './pages/exercises/exercises';
+import {reducers as ExercisesFilterReducers} from './pages/exercises-filter/exercises-filter.component';
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
@@ -19,7 +21,7 @@ import {ExercisesEffects} from './pages/exercises/effects/load-exercises.effect'
         deps: [Http]
       }),
       TranslateService,
-      provideStore(Object.assign({}, reducers))
+      provideStore(Object.assign({}, ExercisesReducers, ExercisesFilterReducers))
    ]
 })
 export class MyApp {

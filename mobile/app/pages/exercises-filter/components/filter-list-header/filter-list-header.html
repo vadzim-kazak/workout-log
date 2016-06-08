@@ -1,0 +1,4 @@
+<ion-list-header class="FilterListHeader">
+    <ion-label>{{title}}</ion-label>
+    <ion-toggle secondary #toggle [(ngModel)]="!isUnchecked" (click)="onClickHandler(category,values,toggle)"></ion-toggle>
+</ion-list-header>

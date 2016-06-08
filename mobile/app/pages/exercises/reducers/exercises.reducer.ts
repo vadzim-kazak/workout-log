@@ -7,5 +7,4 @@ export const exercisesReducer = createReducer<Array<any>>([], {
         let exercises = action.payload;
         return [...exercises];
     }
-    
 });

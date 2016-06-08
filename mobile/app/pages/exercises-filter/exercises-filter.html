@@ -1,0 +1,56 @@
+<toolbar [title]="'EXERCISES_FILTER_TOOLBAR_TITLE' | translate"></toolbar>
+  
+<ion-content>
+    
+     <ion-buttons>
+        <button clear full (click)="resetExercisesFilter()">
+            <ion-icon name="sync"></ion-icon>
+            {{'EXERCISES_FILTER_RESET' | translate}}
+        </button>
+    </ion-buttons>
+    
+    <ion-list>
+        
+        <filter-list-header [title]="'EXERCISES_FILTER_TYPES' | translate"
+                            [category]="'type'" 
+                            [values]="(exercisesFilteringCriteria | async).types"
+                            [isUnchecked]="isCategoryHeaderUnchecked('type')"
+                            (filterCategoryUpdated)="handleFilterCategoryHeaderUpdate($event)"></filter-list-header>
+
+        <filter-list-item *ngFor="let type of (exercisesFilteringCriteria | async).types" 
+                          [label]="'TYPE_' + type | translate | normalize"
+                          [value]="type"
+                          [category]="'type'"
+                          [isUnchecked]="isFilterValueUnchecked('type',type)"
+                          (filterCriterionUpdated)="handleFilterCriterionUpdate($event)"></filter-list-item>
+        
+        <filter-list-header [title]="'EXERCISES_FILTER_MECHANICS' | translate"
+                            [category]="'mechanics'" 
+                            [values]="(exercisesFilteringCriteria | async).mechanics"
+                            [isUnchecked]="isCategoryHeaderUnchecked('mechanics')"
+                            (filterCategoryUpdated)="handleFilterCategoryHeaderUpdate($event)"></filter-list-header>
+
+        <filter-list-item *ngFor="let mechanics of (exercisesFilteringCriteria | async).mechanics" 
+                          [label]="'MECHANICS_' + mechanics | translate | normalize"
+                          [value]="mechanics"
+                          [category]="'mechanics'"
+                          [isUnchecked]="isFilterValueUnchecked('mechanics',mechanics)"
+                          (filterCriterionUpdated)="handleFilterCriterionUpdate($event)"></filter-list-item>
+       
+        <filter-list-header [title]="'EXERCISES_FILTER_MUSCLES' | translate"
+                            [category]="'mainMuscles'"
+                            [values]="(exercisesFilteringCriteria | async).muscles"
+                            [isUnchecked]="isCategoryHeaderUnchecked('mainMuscles')"
+                            (filterCategoryUpdated)="handleFilterCategoryHeaderUpdate($event)"></filter-list-header>
+
+        <filter-list-item *ngFor="let muscle of (exercisesFilteringCriteria | async).muscles" 
+                          [label]="muscle | translate | normalize"
+                          [value]="muscle"
+                          [category]="'mainMuscles'"
+                          [isUnchecked]="isFilterValueUnchecked('mainMuscles',muscle)"
+                          (filterCriterionUpdated)="handleFilterCriterionUpdate($event)"></filter-list-item>
+        
+    </ion-list>
+
+</ion-content>
+

@@ -13,8 +13,8 @@ import java.util.Locale;
 import java.util.Set;
 
 /**
- * Created by Kazak_VV on 18.06.2015.
- */
+* Created by Kazak_VV on 18.06.2015.
+        */
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/api/v1")

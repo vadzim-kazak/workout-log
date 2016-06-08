@@ -18,7 +18,7 @@ import {ExercisesFilteringService} from './services/exercises-filtering.service'
 
 export const reducers = {
     exercises: exercisesReducer,
-    exercisesSearchQuery: exercisesSearchReducer 
+    exercisesSearchQuery: exercisesSearchReducer,
 }
 
 @Page({
@@ -31,13 +31,15 @@ export class Exercises {
   
   exercises: Observable<any>;
   exercisesEffectsSubscription: Subscription;
+  filteringCriteriaSubscription: Subscription; 
   
   constructor(private store: Store<any>, exercisesEffects: ExercisesEffects, 
-              filteringSerivce: ExercisesFilteringService) {
+              filteringService: ExercisesFilteringService) {
       
       this.exercises = Observable.combineLatest(store.select('exercises'), 
-                                                store.select('exercisesSearchQuery'), 
-                                                filteringSerivce.searchByQuery);
+                                                store.select('exercisesSearchQuery'),
+                                                store.select('exercisesFilter'), 
+                                                filteringService.searchByQuery);
       
       // Manually run effect subscription
       this.exercisesEffectsSubscription = exercisesEffects.load$.subscribe(store);
@@ -45,7 +47,7 @@ export class Exercises {
   }
   
   searchExercises($event) {
-     this.store.dispatch({type: 'UPDATE_SEARCH_QUERY', 
+     this.store.dispatch({type: 'UPDATE_EXERCISES_SEARCH_QUERY', 
                           payload:  $event.value})
   }
   
