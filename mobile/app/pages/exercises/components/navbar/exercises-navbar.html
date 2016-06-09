@@ -2,16 +2,22 @@
         
     <!-- Search active state -->
     <div *ngIf="isSearchActive">
-        <ion-searchbar (input)="searchExercises.emit($event)"
-                       (cancel)="toggleSearchMode()"
+        <ion-searchbar (ionInput)="searchExercises.emit($event)"
+                       (ionCancel)="toggleSearchMode()"
                        [placeholder]="'NAVBAR_SEARCH_PLACEHOLDER' | translate"> 
         </ion-searchbar>
     </div>
     
     <!-- Search inactive state -->
-    <button *ngIf="!isSearchActive" menuToggle left>
+     <ion-buttons *ngIf="!isSearchActive" left>
+        <button>
+            <ion-icon name='menu'></ion-icon>
+        </button>
+ 	</ion-buttons>
+    
+    <!--<button  menuToggle left>
         <ion-icon name='menu'></ion-icon>
-    </button>   
+    </button>   -->
    
     <ion-title *ngIf="!isSearchActive">{{'NAVBAR_APP_NAME' | translate}}</ion-title>  
     

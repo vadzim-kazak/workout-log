@@ -57,6 +57,9 @@
     "EXERCISES_FILTER_MUSCLES": "Muscles",
     "EXERCISES_FILTER_TYPES": "Exercises type",
     "EXERCISES_FILTER_MECHANICS": "Mechanics",
-    "EXERCISES_FILTER_RESET": "Reset"
+    "EXERCISES_FILTER_RESET": "Reset",
+
+    "WORKOUT_TOOLBAR_TITLE": "Workout"
+
     
 }

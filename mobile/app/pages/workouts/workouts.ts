@@ -1,9 +1,9 @@
-import {Page} from 'ionic-angular';
+import {Component} from '@angular/core';
 import * as moment from 'moment';
 import {WeeksHeader} from './components/weeks-header/weeks-header.component';
 import {DayItem} from './components/day-item/day-item.component';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/workouts/workouts.html',
   directives: [WeeksHeader, DayItem]
 })

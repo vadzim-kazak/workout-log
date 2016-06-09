@@ -1,6 +1,6 @@
 // Libs
-import {Platform, App} from 'ionic-angular';
-import {provide} from '@angular/core';
+import {Platform, ionicBootstrap} from 'ionic-angular';
+import {Component, provide} from '@angular/core';
 import {Http} from '@angular/http';
 import {TRANSLATE_PROVIDERS, TranslateService, TranslatePipe, TranslateLoader, TranslateStaticLoader, MissingTranslationHandler} from 'ng2-translate/ng2-translate';
 import {CommonMissingTranslationHandler} from './common/i18n/missing-translation.handler';
@@ -14,9 +14,8 @@ import {reducers as ExercisesReducers} from './pages/exercises/exercises';
 import {reducers as ExercisesFilterReducers} from './pages/exercises-filter/exercises-filter.component';
 
 
-@App({
+@Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
-  config: {}, // http://ionicframework.com/docs/v2/api/config/Config/
   providers: [ 
       provide(MissingTranslationHandler, {useClass: CommonMissingTranslationHandler}),
       provide(TranslateLoader, {
@@ -46,3 +45,10 @@ export class MyApp {
      moment.locale('ru');
   }
 }
+
+// Pass the main app component as the first argument
+// Pass any providers for your app in the second argument
+// Set any config for your app as the third argument:
+// http://ionicframework.com/docs/v2/api/config/Config/
+
+ionicBootstrap(MyApp);

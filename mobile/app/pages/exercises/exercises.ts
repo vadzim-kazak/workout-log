@@ -1,5 +1,5 @@
 // Core
-import {Page} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {Observable, Subject, Subscription} from 'rxjs';
 import {ChangeDetectionStrategy} from '@angular/core';
 import {Store} from '@ngrx/store';
@@ -21,7 +21,7 @@ export const reducers = {
     exercisesSearchQuery: exercisesSearchReducer,
 }
 
-@Page({
+@Component({
   templateUrl: 'build/pages/exercises/exercises.html',
   providers: [ExercisesEffects, StateUpdates, ExercisesFilteringService],
   directives: [ExercisesNavbar, ExercisesList],

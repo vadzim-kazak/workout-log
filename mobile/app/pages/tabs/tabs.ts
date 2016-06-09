@@ -1,4 +1,4 @@
-import {Page} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {Page3} from '../page3/page3';
 import {Workouts} from '../workouts/workouts';
 import {Exercises} from '../exercises/exercises';
@@ -6,7 +6,7 @@ import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 
 import {ExercisesFilter} from '../exercises-filter/exercises-filter.component';
 
-@Page({
+@Component({
   templateUrl: 'build/pages/tabs/tabs.html',
   pipes: [TranslatePipe],
   directives: [ExercisesFilter]

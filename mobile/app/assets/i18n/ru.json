@@ -56,5 +56,7 @@
     "EXERCISES_FILTER_MUSCLES": "Мышечная группа",
     "EXERCISES_FILTER_TYPES": "Тип упражнения",
     "EXERCISES_FILTER_MECHANICS": "Механика выполнения",
-    "EXERCISES_FILTER_RESET": "Сбросить"
+    "EXERCISES_FILTER_RESET": "Сбросить",
+
+    "WORKOUT_TOOLBAR_TITLE": "Тренировка"
 }
