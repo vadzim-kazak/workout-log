@@ -1,9 +1,21 @@
 <ion-navbar *navbar>
-  <!--<button menuToggle>
-    <ion-icon name='menu'></ion-icon>
-  </button>-->
   <ion-title>Workouts Log</ion-title>
 </ion-navbar>
 
-<ion-content padding>
+<ion-content>
+    <ion-list [virtualScroll]="items" [headerFn]="weeksHeader">
+      
+      <ion-item-divider *virtualHeader="let header">
+        <weeks-header [header]="header"></weeks-header>
+      </ion-item-divider>
+      
+      <ion-item ion-item *virtualItem="let item">
+        <day-item [item]="item"></day-item>
+      </ion-item>
+    </ion-list>
+    
+    <ion-infinite-scroll (infinite)="doInfinite($event)">
+      <ion-infinite-scroll-content state="ebabled"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
 </ion-content>

@@ -1,0 +1,5 @@
+.DayItem {
+    @include element(addWorkout){
+        color:  color($colors, primary);
+    }
+}

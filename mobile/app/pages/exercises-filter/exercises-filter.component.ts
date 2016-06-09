@@ -38,7 +38,8 @@ export class ExercisesFilter {
     filterCategoriesStateSubscription:  Subscription;
     filteringCriteriaSubscription: Subscription;
 
-    constructor(private viewController: ViewController, private store: Store<any>, filteringCriteriaEffects: FilteringCriteriaEffects) {
+    constructor(private viewController: ViewController, private store: Store<any>, 
+                filteringCriteriaEffects: FilteringCriteriaEffects) {
       this.filteringCriteria = store.select('exercisesFilteringCriteria');
       this.filterStateSubscription = store.select('exercisesFilter').subscribe(value => this.filterState = value);
       this.filterCategoriesStateSubscription = store.select('exercisesFilterCategories').subscribe(state => this.filterCategoriesState = state);

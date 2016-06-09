@@ -13,9 +13,7 @@ import {ExercisesFilter} from '../exercises-filter/exercises-filter.component';
 })
 export class TabsPage {
   
-  constructor(private translate: TranslateService) {
-    console.log(translate.instant('TAB_TITLE_WORKOUTS'));  
-  }
+  constructor(private translate: TranslateService) {}
   
   // this tells the tabs component which Pages
   // should be each tab's root Page

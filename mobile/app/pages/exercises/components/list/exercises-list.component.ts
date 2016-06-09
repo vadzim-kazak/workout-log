@@ -18,7 +18,6 @@ export class ExercisesList {
   
   exerciseGroupHeader = (exercise, exerciseIndex, exercises) => {
       
-     
       if (exerciseIndex > 0) {
         let previousExercise = exercises[exerciseIndex - 1];
         if (exercise.mainMuscles[0] !== previousExercise.mainMuscles[0]) {

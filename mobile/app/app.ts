@@ -1,3 +1,4 @@
+// Libs
 import {Platform, App} from 'ionic-angular';
 import {provide} from '@angular/core';
 import {Http} from '@angular/http';
@@ -6,10 +7,12 @@ import {CommonMissingTranslationHandler} from './common/i18n/missing-translation
 import {StatusBar} from 'ionic-native';
 import {TabsPage} from './pages/tabs/tabs';
 import {provideStore} from '@ngrx/store';
-
+import * as moment from 'moment';
+import 'moment/locale/ru';
 // Reducers
 import {reducers as ExercisesReducers} from './pages/exercises/exercises';
 import {reducers as ExercisesFilterReducers} from './pages/exercises-filter/exercises-filter.component';
+
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
@@ -38,6 +41,8 @@ export class MyApp {
     
      translate.setDefaultLang('en');
      translate.use('en');
+     moment.locale('en');
      translate.use('ru');
+     moment.locale('ru');
   }
 }
