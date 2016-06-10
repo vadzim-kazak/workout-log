@@ -15,7 +15,7 @@ export class Exercise {
   exercise;
   
   constructor(navParams: NavParams) {
-    this.exercise = navParams.get("exercise");    
+    this.exercise = navParams.get('exercise');    
   }
   
 }

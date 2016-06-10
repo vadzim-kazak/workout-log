@@ -1,7 +1,7 @@
 import {Input, Output, EventEmitter, Component} from '@angular/core';
 import {NavController, Modal} from 'ionic-angular';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
-import {ExercisesFilter} from '../../../exercises-filter/exercises-filter.component';
+import {ExercisesFilter} from '../../../exercises-filter/exercises-filter';
 
 @Component({
   selector: 'exercises-navbar',

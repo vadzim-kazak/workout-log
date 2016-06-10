@@ -1,5 +1,10 @@
 {
-    
+    "ALERT_OK": "ok",
+    "ALERT_CANCEL": "cancel",
+
+    "DATE_TIME_PICKER_CANCEL_TEXT": "cancel",
+    "DATE_TIME_PICKER_DONE_TEXT": "done",
+
     "TAB_TITLE_WORKOUTS": "Workouts",
     "TAB_TITLE_EXERCISES": "Exercises",
     "TAB_TITLE_STATS": "Stats",
@@ -59,7 +64,17 @@
     "EXERCISES_FILTER_MECHANICS": "Mechanics",
     "EXERCISES_FILTER_RESET": "Reset",
 
-    "WORKOUT_TOOLBAR_TITLE": "Workout"
+    "WORKOUT_NEW_TOOLBAR_TITLE": "New workout",
+    "WORKOUT_TOOLBAR_TITLE": "Workout",
+    "WORKOUT_NAME": "Name",
+    "WORKOUT_TYPE": "Type",
+    "WORKOUT_TYPE_ONE_TIME": "One time",
+    "WORKOUT_TYPE_WEEKLY": "Weekly",
+    "WORKOUT_TYPE_CUSTOM_PERIOD": "Custom period",
+    "WORKOUT_TYPE_CUSTOM_PERIOD_IN_DAYS": "Period in days",
+    "WORKOUT_ONE_TIME_DATE": "Date",
+    "WORKOUT_PERIODIC_FIRST_DATE": "First workout date",
+    "WORKOUT_EXERCISES": "Exercises"
 
     
 }

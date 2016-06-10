@@ -4,7 +4,7 @@ import {Workouts} from '../workouts/workouts';
 import {Exercises} from '../exercises/exercises';
 import {TranslateService, TranslatePipe} from 'ng2-translate/ng2-translate';
 
-import {ExercisesFilter} from '../exercises-filter/exercises-filter.component';
+import {ExercisesFilter} from '../exercises-filter/exercises-filter';
 
 @Component({
   templateUrl: 'build/pages/tabs/tabs.html',

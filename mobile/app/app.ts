@@ -11,7 +11,7 @@ import * as moment from 'moment';
 import 'moment/locale/ru';
 // Reducers
 import {reducers as ExercisesReducers} from './pages/exercises/exercises';
-import {reducers as ExercisesFilterReducers} from './pages/exercises-filter/exercises-filter.component';
+import {reducers as ExercisesFilterReducers} from './pages/exercises-filter/exercises-filter';
 
 
 @Component({

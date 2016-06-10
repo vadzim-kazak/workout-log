@@ -1,1 +1,9 @@
 @import "./components/day-item/day-item";
+
+.Workouts{
+
+    @include element(add) {
+        z-index:100;
+    }
+
+}

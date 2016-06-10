@@ -1,4 +1,10 @@
 {
+    "ALERT_OK": "ок",
+    "ALERT_CANCEL": "отмена",
+
+    "DATE_TIME_PICKER_CANCEL_TEXT": "отмена",
+    "DATE_TIME_PICKER_DONE_TEXT": "готово",
+    
     "TAB_TITLE_WORKOUTS": "Тренировки",
     "TAB_TITLE_EXERCISES": "Упражнения",
     "TAB_TITLE_STATS": "Статистика",
@@ -58,5 +64,15 @@
     "EXERCISES_FILTER_MECHANICS": "Механика выполнения",
     "EXERCISES_FILTER_RESET": "Сбросить",
 
-    "WORKOUT_TOOLBAR_TITLE": "Тренировка"
+    "WORKOUT_NEW_TOOLBAR_TITLE": "Новая тренировка",
+    "WORKOUT_TOOLBAR_TITLE": "Тренировка",
+    "WORKOUT_NAME": "Название",
+    "WORKOUT_TYPE": "Тип",
+    "WORKOUT_TYPE_ONE_TIME": "Разовая",
+    "WORKOUT_TYPE_WEEKLY": "Каждую неделю",
+    "WORKOUT_TYPE_CUSTOM_PERIOD": "Настраиваемый период",
+    "WORKOUT_TYPE_CUSTOM_PERIOD_IN_DAYS": "Период в днях",
+    "WORKOUT_ONE_TIME_DATE": "Дата",
+    "WORKOUT_PERIODIC_FIRST_DATE": "Дата первой тренировки",
+    "WORKOUT_EXERCISES": "Упражнения"
 }

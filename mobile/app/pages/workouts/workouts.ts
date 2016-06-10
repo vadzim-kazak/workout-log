@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
+import {NavController} from 'ionic-angular';
 import * as moment from 'moment';
 import {WeeksHeader} from './components/weeks-header/weeks-header.component';
 import {DayItem} from './components/day-item/day-item.component';
+import {Workout} from '../workout/workout';
 
 @Component({
   templateUrl: 'build/pages/workouts/workouts.html',
@@ -11,7 +13,7 @@ export class Workouts {
   
   items = [];
   
-  constructor() {
+  constructor(private navController: NavController) {
     let lastWeekDay = moment().endOf('week');
     this.populateCalendarMonth(lastWeekDay);
   }
@@ -54,5 +56,9 @@ export class Workouts {
 
     }, 1000);
 
+  }
+
+  addWorkoutClickHandler() {
+    this.navController.push(Workout, {toolBarTitle: 'WORKOUT_NEW_TOOLBAR_TITLE'});
   }
 }

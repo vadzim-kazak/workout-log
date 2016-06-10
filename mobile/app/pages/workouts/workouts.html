@@ -1,13 +1,11 @@
 <ion-navbar *navbar>
   <ion-buttons left>
-    <button>
-        <ion-icon name='menu'></ion-icon>
-    </button>
   </ion-buttons>  
   <ion-title>Workouts Log</ion-title>
 </ion-navbar>
 
 <ion-content>
+    
     <ion-list [virtualScroll]="items" [headerFn]="weeksHeader">
       
       <ion-item-divider *virtualHeader="let header">
@@ -17,10 +15,15 @@
       <ion-item ion-item *virtualItem="let item">
         <day-item [item]="item"></day-item>
       </ion-item>
+    
     </ion-list>
     
-    <ion-infinite-scroll (infinite)="doInfinite($event)">
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
       <ion-infinite-scroll-content state="ebabled"></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
 </ion-content>
+
+<button secondary fab fab-right fab-bottom class="Workouts-add" (click)="addWorkoutClickHandler()">
+    <ion-icon name="add"></ion-icon>
+</button>

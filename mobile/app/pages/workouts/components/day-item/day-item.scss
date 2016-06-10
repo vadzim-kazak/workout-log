@@ -1,5 +1,6 @@
 .DayItem {
     @include element(addWorkout){
-        color:  color($colors, primary);
+        color:  color($colors, secondary);
+        font-size: 2rem;
     }
 }

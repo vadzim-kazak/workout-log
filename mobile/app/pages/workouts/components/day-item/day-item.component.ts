@@ -1,9 +1,6 @@
 import {Input, Output, EventEmitter, Component} from '@angular/core';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {Observable} from 'rxjs';
-import {Exercise} from '../../../exercise/exercise';
-import {NavController} from 'ionic-angular';
-import {Workout} from '../../../workout/workout.component';
 
 @Component({
   selector: 'day-item',
@@ -14,10 +11,6 @@ export class DayItem {
   
   @Input() item;
 
-  constructor(private navController: NavController) {}
+  constructor() {}
 
-  handleWorkoutClick() {
-    this.navController.push(Workout);
-  }
-  
 }

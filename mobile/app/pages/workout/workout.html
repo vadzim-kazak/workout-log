@@ -1,39 +1,18 @@
-<toolbar [title]="'WORKOUT_TOOLBAR_TITLE' | translate"></toolbar>
+<toolbar [title]="toolbarTitleKey | translate"></toolbar>
+
+<workout-common-info></workout-common-info>
+
+<workout-exercises-header></workout-exercises-header>
 
 <ion-content>
+</ion-content>   
+
+          
+
+
+
     
-    <ion-list>
-
-        <ion-item>
-            <ion-label>{{'WORKOUT_NAME' | translate}}</ion-label>
-            <ion-input type="text"></ion-input>
-        </ion-item>
-
-       <ion-item>
-            <ion-label>{{'WORKOUT_TYPE' | translate}}</ion-label>
-            <ion-select [(ngModel)]="workoutType" [okText]="'ALERT_OK' | translate" [cancelText]="'ALERT_CANCEL' | translate">
-                <ion-option value="oneTime">{{'WORKOUT_TYPE_ONE_TIME' | translate}}</ion-option>
-                <ion-option value="weekly">{{'WORKOUT_TYPE_WEEKLY' | translate}}</ion-option>
-                <ion-option value="customPeriod">{{'WORKOUT_TYPE_CUSTOM_PERIOD' | translate}}</ion-option>
-            </ion-select>
-       </ion-item>
-
-       <ion-item *ngIf="isCustomPeriodVisible()">
-            <!--<ion-label>Set period in days:</ion-label>
-            <ion-datetime displayFormat="D" [(ngModel)]="customPeriod"></ion-datetime>-->
-           
-            <ion-label>{{'WORKOUT_TYPE_CUSTOM_PERIOD_IN_DAYS' | translate}}</ion-label>
-            <ion-datetime displayFormat="H" pickerFormat="H" 
-                          [cancelText]="'DATE_TIME_PICKER_CANCEL_TEXT' | translate"
-                          [doneText]= "'DATE_TIME_PICKER_DONE_TEXT' | translate" 
-                          [hourValues]="pickerRange" 
-                          [(ngModel)]="customPeriodTime"
-                          (ionChange)="fetchCustomPeriodTime($event)"></ion-datetime>
-            
-       </ion-item>
-
-    </ion-list>
 
 
-</ion-content>
+
 
