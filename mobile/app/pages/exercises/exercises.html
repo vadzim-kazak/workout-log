@@ -1,6 +1,12 @@
-<exercises-navbar (searchExercises)="searchExercises($event)"></exercises-navbar>
+<exercises-navbar (searchExercises)="searchExercises($event)" [isWorkoutCreationFlow]="isWorkoutCreationFlow"></exercises-navbar>
 
-<ion-content>
-   <exercises-list [exercises]="exercises"></exercises-list>
+<ion-content #exercisesList>
+   <exercises-list [exercises]="exercises" [isWorkoutCreationFlow]="isWorkoutCreationFlow"></exercises-list>
 </ion-content>
+
+<ion-menu *ngIf="isWorkoutCreationFlow" id="fullPageExercisesfilterMenu" [content]="exercisesList" side="right">
+   <ion-content>
+    <exercises-filter></exercises-filter>
+   </ion-content>      
+</ion-menu>
 

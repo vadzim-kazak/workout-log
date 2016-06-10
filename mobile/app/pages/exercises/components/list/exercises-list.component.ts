@@ -13,6 +13,7 @@ import {TranslateService} from 'ng2-translate/ng2-translate';
 export class ExercisesList {
   
   @Input() exercises: Observable<any>;
+  @Input() isWorkoutCreationFlow;
   
   constructor(private translate: TranslateService) { }
   

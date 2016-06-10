@@ -1,5 +1,5 @@
 import {Input, Output, EventEmitter, Component} from '@angular/core';
-import {NavController, Modal} from 'ionic-angular';
+import {MenuController} from 'ionic-angular';
 import {TranslatePipe} from 'ng2-translate/ng2-translate';
 import {ExercisesFilter} from '../../../exercises-filter/exercises-filter';
 
@@ -11,9 +11,10 @@ import {ExercisesFilter} from '../../../exercises-filter/exercises-filter';
 export class ExercisesNavbar {
     
     isSearchActive: boolean;
+    @Input() isWorkoutCreationFlow;
     @Output() searchExercises = new EventEmitter();
     
-    constructor(private navController: NavController){}
+    constructor(private menuController: MenuController){}
     
     toggleSearchMode() {
         this.isSearchActive = !this.isSearchActive; 
@@ -23,8 +24,20 @@ export class ExercisesNavbar {
     }
     
     toggleFilter() {
-        let modal = Modal.create(ExercisesFilter);
-        this.navController.present(modal);
+        
+        if (this.isWorkoutCreationFlow) {
+           
+           this.menuController.enable(true, 'fullPageExercisesfilterMenu');
+           this.menuController.enable(false, 'tabsExercisesfilterMenu');
+           
+           this.menuController.toggle('fullPageExercisesfilterMenu');
+        } else {
+           
+           this.menuController.enable(true, 'tabsExercisesfilterMenu');
+           this.menuController.enable(false, 'fullPageExercisesfilterMenu');
+           
+           this.menuController.toggle('tabsExercisesfilterMenu');
+        }
+
     }
-    
 }   

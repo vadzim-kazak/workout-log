@@ -1,7 +1,7 @@
 // Core
-import {Component} from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
 import {Observable, Subject, Subscription} from 'rxjs';
-import {ChangeDetectionStrategy} from '@angular/core';
+import {NavParams, NavController} from 'ionic-angular';
 import {Store} from '@ngrx/store';
 import {StateUpdates} from '@ngrx/effects'
 import {TranslateService} from 'ng2-translate/ng2-translate';
@@ -13,6 +13,7 @@ import {exercisesSearchReducer} from './reducers/exercises-search.reducer';
 // Components
 import {ExercisesNavbar} from './components/navbar/exercises-navbar.component';
 import {ExercisesList} from './components/list/exercises-list.component';
+import {ExercisesFilter} from '../exercises-filter/exercises-filter';
 // Services
 import {ExercisesFilteringService} from './services/exercises-filtering.service';
 
@@ -24,17 +25,20 @@ export const reducers = {
 @Component({
   templateUrl: 'build/pages/exercises/exercises.html',
   providers: [ExercisesEffects, StateUpdates, ExercisesFilteringService],
-  directives: [ExercisesNavbar, ExercisesList],
+  directives: [ExercisesNavbar, ExercisesList, ExercisesFilter],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Exercises {
   
   exercises: Observable<any>;
   exercisesEffectsSubscription: Subscription;
-  filteringCriteriaSubscription: Subscription; 
+  filteringCriteriaSubscription: Subscription;
+  isWorkoutCreationFlow: boolean = false; 
   
   constructor(private store: Store<any>, exercisesEffects: ExercisesEffects, 
-              filteringService: ExercisesFilteringService) {
+              filteringService: ExercisesFilteringService,
+              navParams: NavParams,
+              private navController: NavController) {
       
       this.exercises = Observable.combineLatest(store.select('exercises'), 
                                                 store.select('exercisesSearchQuery'),
@@ -44,6 +48,11 @@ export class Exercises {
       // Manually run effect subscription
       this.exercisesEffectsSubscription = exercisesEffects.load$.subscribe(store);
       this.store.dispatch({type: 'LOAD_EXERCISES'});
+
+      let worklightCreationFlowParam = navParams.get('isWorkoutCreationFlow');
+      if (worklightCreationFlowParam) {
+          this.isWorkoutCreationFlow = true;
+      } 
   }
   
   searchExercises($event) {

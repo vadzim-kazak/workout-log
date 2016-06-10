@@ -12,6 +12,7 @@ import {Exercise} from '../../../exercise/exercise';
 export class ExercisesListItem {
   
   @Input() exercise;
+  @Input() isWorkoutCreationFlow;
   
   constructor(private navController: NavController) {}
   

@@ -18,6 +18,11 @@
     @include element(favorite) {
         font-size: 2rem;
     }
+
+    @include element(add) {
+        font-size: 2rem;
+        color: color($colors, secondary);      
+    }
 }
 
 .ExerciseItemFooter {

@@ -5,8 +5,11 @@
             <ion-col class="ExerciseItemHeader-name" width-80>
                 {{exercise.name}}
             </ion-col>
-            <ion-col text-right>
+            <ion-col text-right *ngIf="!isWorkoutCreationFlow">
                 <ion-icon name='star-outline' class="ExerciseItemHeader-favorite" inactive></ion-icon>
+            </ion-col>
+            <ion-col text-right *ngIf="isWorkoutCreationFlow">
+                <ion-icon name='add-circle' class="ExerciseItemHeader-add" inactive></ion-icon>
             </ion-col>
         </ion-row>
     </ion-card-header>
