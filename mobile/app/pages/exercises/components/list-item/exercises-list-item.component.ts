@@ -13,13 +13,25 @@ export class ExercisesListItem {
   
   @Input() exercise;
   @Input() isWorkoutCreationFlow;
+  @Input() isSelected;
+  @Output() exerciseSelect = new EventEmitter();
+  @Output() exerciseUnselect = new EventEmitter();
   
   constructor(private navController: NavController) {}
   
   exerciseOnClick(exercise) {
-     
      let modal = Modal.create(Exercise, {exercise});
      this.navController.present(modal);
+  }
+
+  selectExercise($event, exerciseId) {
+    $event.stopPropagation();
+    this.exerciseSelect.emit(exerciseId);
+  }
+
+  unselectExercise($event, exerciseId) {
+    $event.stopPropagation();
+    this.exerciseUnselect.emit(exerciseId);
   }
   
 }

@@ -7,8 +7,18 @@
         </ion-item-divider>
         
         <ion-item *virtualItem="let exercise">
-          <exercises-list-item [exercise]="exercise" [isWorkoutCreationFlow]="isWorkoutCreationFlow"></exercises-list-item>  
+          <exercises-list-item [exercise]="exercise" 
+                               [isWorkoutCreationFlow]="isWorkoutCreationFlow"
+                               [isSelected]="(exercisesSelected | async)[exercise.id]"
+                               (exerciseSelect)="exerciseSelect.emit($event)"
+                               (exerciseUnselect)="exerciseUnselect.emit($event)"></exercises-list-item>  
         </ion-item>
 
   </ion-list>
 </ion-content>
+
+<button *ngIf="isWorkoutCreationFlow && checkExercisesSelection((exercisesSelected | async))" 
+        class="ExercisesList-completeSelectionButton" primary fab fab-right fab-bottom
+        (click)="completeExerciseSelection.emit()">
+    <ion-icon name="checkmark"></ion-icon>
+</button>

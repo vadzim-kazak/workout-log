@@ -1,7 +1,7 @@
 <ion-card class="ExerciseItem" (click)=exerciseOnClick(exercise)>
     
-    <ion-card-header class="ExerciseItem-header">
-        <ion-row>
+    <ion-card-header class="ExerciseItem-header" [class.ExerciseItem-header--selected]="isSelected && isWorkoutCreationFlow">
+        <ion-row center> 
             <ion-col class="ExerciseItemHeader-name" width-80>
                 {{exercise.name}}
             </ion-col>
@@ -9,7 +9,20 @@
                 <ion-icon name='star-outline' class="ExerciseItemHeader-favorite" inactive></ion-icon>
             </ion-col>
             <ion-col text-right *ngIf="isWorkoutCreationFlow">
-                <ion-icon name='add-circle' class="ExerciseItemHeader-add" inactive></ion-icon>
+                
+                <button *ngIf="!isSelected" small clear 
+                        (click)="selectExercise($event,exercise.id)" 
+                        class="ExerciseItemHeader-addButton">
+                    <ion-icon  name='add-circle' class="ExerciseItemHeader-addIcon" ></ion-icon>
+                </button>
+
+                <button *ngIf="isSelected" small clear 
+                        (click)="unselectExercise($event,exercise.id)"
+                        class="ExerciseItemHeader-addButton">
+                    <ion-icon *ngIf="isSelected" name='remove-circle' 
+                              class="ExerciseItemHeader-addIcon ExerciseItemHeader-addIcon--selected"></ion-icon>
+                </button>
+                
             </ion-col>
         </ion-row>
     </ion-card-header>

@@ -14,6 +14,10 @@ export class ExercisesList {
   
   @Input() exercises: Observable<any>;
   @Input() isWorkoutCreationFlow;
+  @Input() exercisesSelected;
+  @Output() exerciseSelect = new EventEmitter();
+  @Output() exerciseUnselect = new EventEmitter();
+  @Output() completeExerciseSelection = new EventEmitter();
   
   constructor(private translate: TranslateService) { }
   
@@ -31,9 +35,22 @@ export class ExercisesList {
       
       return null;
   }
+
+  test($event) {
+    console.log($event);
+  }
   
   getTranslateValue = (value) => {
      return this.translate.instant(value.toUpperCase());    
+  }
+
+  checkExercisesSelection(selectedExercises) {
+    
+    if (selectedExercises && Object.keys(selectedExercises).length > 0) {
+      return true;
+    }
+
+    return false;
   }
   
 }

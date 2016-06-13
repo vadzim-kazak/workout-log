@@ -7,6 +7,10 @@
         background: grey;
         color: white; 
         padding: 8px;      
+    
+        @include modifier(selected) {
+            background: color($colors, secondary);      
+        }
     }
 }
 
@@ -19,9 +23,17 @@
         font-size: 2rem;
     }
 
-    @include element(add) {
+    @include element(addButton) {
+        margin: 0px;  
+    }
+    
+    @include element(addIcon) {
         font-size: 2rem;
-        color: color($colors, secondary);      
+        color: color($colors, secondary);   
+
+        @include modifier(selected) {
+            color: color($colors, light);
+        }   
     }
 }
 

@@ -23,7 +23,7 @@ export class ExercisesNavbar {
         // https://github.com/driftyco/ionic/issues/5834 
     }
     
-    toggleFilter() {
+    toggleFilter($event) {
         
         if (this.isWorkoutCreationFlow) {
            

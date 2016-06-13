@@ -16,11 +16,10 @@ export class Workout {
   
   workoutType: string = 'oneTime';
   toolbarTitleKey: string = 'WORKOUT_TOOLBAR_TITLE';  
+  exercises: {} = {};
 
   constructor(navParams: NavParams, private navController: NavController) {
       this.toolbarTitleKey = navParams.get('toolBarTitle');    
   }
-
- 
   
 }

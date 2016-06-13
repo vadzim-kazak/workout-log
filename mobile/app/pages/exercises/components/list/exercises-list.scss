@@ -2,4 +2,8 @@
    @include element(category) {
         color:  color($colors, primary);         
    }
+
+   @include element(completeSelectionButton) {
+       z-index:100;
+   }
 }
