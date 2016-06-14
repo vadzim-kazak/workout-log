@@ -2,7 +2,26 @@
 @import "./components/exercises-header/exercises-header";
 
 .Workout {
+    
     @include element(complete) {
         @extend .CustomFab;
     }
-}
+
+    @include element(start) {
+        ion-icon {
+             color: color($colors, secondary);        
+        }
+    }
+
+    @include element(save) {
+         ion-icon {
+             color: color($colors, primary);        
+        }
+    }
+
+    @include element(cancel) {
+         ion-icon {
+             color: color($colors, danger);        
+        }
+    }
+}    

@@ -1,4 +1,4 @@
-import {createReducer} from '../../../common/util/createReducer';
+import {createReducer} from '../../../common/util/create-reducer';
 
 export const exercisesSearchReducer = createReducer<String>('', {
     

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 import * as moment from 'moment';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {NavController, NavParams} from 'ionic-angular';
@@ -11,14 +11,22 @@ import {Exercises} from '../../../exercises/exercises';
 })
 export class WorkoutCommonInfo {
   
-  workoutType: string = 'oneTime';
-  workoutStartDate: string = moment().format();
+  // Default workout object
+  @Input() workout: any = {
+    name: '',
+    type: 'oneTime',
+    startDate: moment().format(),
+    customPeriod: 7 
+  };
+  
+  @Output() nameInputBlurEvent = new EventEmitter();
+
+
   dayShortNames = moment.weekdaysMin();
   monthNames = moment.months().map(month => month.charAt(0).toUpperCase() + month.slice(1));
 
   // Dirty hack which allows to use ionic-datetime picker component for numbers selection
-  customPeriod: number = 7;
-  customPeriodTime = moment().set('hour', this.customPeriod).format();
+  customPeriodTime = moment().set('hour', this.workout.customPeriod).format();
   pickerRange = [];
 
   constructor(navParams: NavParams, private navController: NavController) {
@@ -30,11 +38,11 @@ export class WorkoutCommonInfo {
   }
 
   isCustomPeriodSetterVisible() {
-      return this.workoutType === 'customPeriod';
+      return this.workout.type === 'customPeriod';
   }
 
   fetchCustomPeriodTime($event) {
-    this.customPeriod = $event.hour.value;   
+    this.workout.customPeriod = $event.hour.value;   
   }
   
 }

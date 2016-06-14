@@ -74,5 +74,10 @@
     "WORKOUT_TYPE_CUSTOM_PERIOD_IN_DAYS": "Период в днях",
     "WORKOUT_ONE_TIME_DATE": "Дата",
     "WORKOUT_PERIODIC_FIRST_DATE": "Дата первой тренировки",
-    "WORKOUT_EXERCISES": "Упражнения"
+    "WORKOUT_EXERCISES": "Упражнения",
+
+    "WORKOUT_COMPLETE_ACTIONS_TITLE": "Завершение создания тренировки",
+    "WORKOUT_COMPLETE_START_WORKOUT": "Начать тренировку",
+    "WORKOUT_COMPLETE_SAVE": "Сохранить и продолжить позже",
+    "WORKOUT_COMPLETE_CANCEL": "Отмена"
 }

@@ -2,12 +2,12 @@
 
     <ion-item>
         <ion-label>{{'WORKOUT_NAME' | translate}}</ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input [(ngModel)]="workout.name" type="text" (blur)="nameInputBlurEvent.emit($event)"></ion-input>
     </ion-item>
 
     <ion-item>
         <ion-label>{{'WORKOUT_TYPE' | translate}}</ion-label>
-        <ion-select [(ngModel)]="workoutType" [okText]="'ALERT_OK' | translate" [cancelText]="'ALERT_CANCEL' | translate">
+        <ion-select [(ngModel)]="workout.type" [okText]="'ALERT_OK' | translate" [cancelText]="'ALERT_CANCEL' | translate">
             <ion-option value="oneTime">{{'WORKOUT_TYPE_ONE_TIME' | translate}}</ion-option>
             <ion-option value="weekly">{{'WORKOUT_TYPE_WEEKLY' | translate}}</ion-option>
             <ion-option value="customPeriod">{{'WORKOUT_TYPE_CUSTOM_PERIOD' | translate}}</ion-option>
@@ -17,11 +17,11 @@
     <ion-item *ngIf="isCustomPeriodSetterVisible()">
         <ion-label>{{'WORKOUT_TYPE_CUSTOM_PERIOD_IN_DAYS' | translate}}</ion-label>
         <ion-datetime displayFormat="H" pickerFormat="H" 
-                        [cancelText]="'DATE_TIME_PICKER_CANCEL_TEXT' | translate"
-                        [doneText]= "'DATE_TIME_PICKER_DONE_TEXT' | translate" 
-                        [hourValues]="pickerRange" 
-                        [(ngModel)]="customPeriodTime"
-                        (ionChange)="fetchCustomPeriodTime($event)"></ion-datetime>
+                      [cancelText]="'DATE_TIME_PICKER_CANCEL_TEXT' | translate"
+                      [doneText]= "'DATE_TIME_PICKER_DONE_TEXT' | translate" 
+                      [hourValues]="pickerRange" 
+                      [(ngModel)]="workout.customPeriodTime"
+                      (ionChange)="fetchCustomPeriodTime($event)"></ion-datetime>
                         
         <!--<ion-label text-left>{{'WORKOUT_TYPE_CUSTOM_PERIOD_IN_DAYS' | translate}}: {{customPeriod}}</ion-label>
         <ion-range min="1" max="60" [(ngModel)]="customPeriod" secondary pin="true">
@@ -31,14 +31,14 @@
     </ion-item>
 
     <ion-item>
-        <ion-label>{{ (workoutType === 'oneTime' ? 'WORKOUT_ONE_TIME_DATE' : 'WORKOUT_PERIODIC_FIRST_DATE') | translate}}</ion-label>
+        <ion-label>{{(workoutType === 'oneTime' ? 'WORKOUT_ONE_TIME_DATE' : 'WORKOUT_PERIODIC_FIRST_DATE') | translate}}</ion-label>
         <ion-datetime displayFormat="DDD, D MMMM"
                       pickerFormat="DDD, D MMMM YYYY"
                       [dayShortNames]="dayShortNames"
                       [monthNames]="monthNames"
                       [cancelText]="'DATE_TIME_PICKER_CANCEL_TEXT' | translate"
                       [doneText]= "'DATE_TIME_PICKER_DONE_TEXT' | translate" 
-                      [(ngModel)]="workoutStartDate"></ion-datetime>
+                      [(ngModel)]="workout.startDate"></ion-datetime>
     </ion-item>
 
 </ion-list>

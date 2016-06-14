@@ -1,6 +1,6 @@
 <toolbar [title]="toolbarTitleKey | translate"></toolbar>
 
-<workout-common-info></workout-common-info>
+<workout-common-info [workout]="workout" (nameInputBlurEvent)="checkCustomNameProvision()"></workout-common-info>
 
 <workout-exercises-header></workout-exercises-header>
 <ion-content>
@@ -10,7 +10,9 @@
                     [showActionButton]="false"></exercises-list>
 </ion-content>   
 
-<button *ngIf="(exercisesSelected | async).length > 0" class="Workout-complete" primary fab fab-right fab-bottom>
+<button *ngIf="(exercisesSelected | async).length > 0" 
+        class="Workout-complete" primary fab fab-right fab-bottom
+        (click)="completeWorkoutCreation()">
     <ion-icon name="done-all"></ion-icon>
 </button>
 

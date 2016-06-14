@@ -1,4 +1,4 @@
-import {createReducer} from '../../../util/createReducer';
+import {createReducer} from '../../../util/create-reducer';
 
 export const exercisesSelectedReducer = createReducer<Array<any>>([], {
     

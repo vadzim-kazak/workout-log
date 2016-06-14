@@ -13,7 +13,7 @@ import 'moment/locale/ru';
 import {reducers as ExercisesReducers} from './pages/exercises/exercises';
 import {reducers as ExercisesFilterReducers} from './pages/exercises-filter/exercises-filter';
 import {reducers as ExercisesListReducers} from './common/components/exercises-list/exercises-list.component';
-
+import {reducers as WorkoutReducers} from './pages/workout/workout';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
@@ -24,7 +24,10 @@ import {reducers as ExercisesListReducers} from './common/components/exercises-l
         deps: [Http]
       }),
       TranslateService,
-      provideStore(Object.assign({}, ExercisesReducers, ExercisesFilterReducers, ExercisesListReducers))
+      provideStore(Object.assign({}, ExercisesReducers, 
+                                     ExercisesFilterReducers, 
+                                     ExercisesListReducers, 
+                                     WorkoutReducers))
    ]
 })
 export class MyApp {

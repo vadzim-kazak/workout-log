@@ -74,7 +74,10 @@
     "WORKOUT_TYPE_CUSTOM_PERIOD_IN_DAYS": "Period in days",
     "WORKOUT_ONE_TIME_DATE": "Date",
     "WORKOUT_PERIODIC_FIRST_DATE": "First workout date",
-    "WORKOUT_EXERCISES": "Exercises"
+    "WORKOUT_EXERCISES": "Exercises",
 
-    
+    "WORKOUT_COMPLETE_ACTIONS_TITLE": "Complete workout creation",
+    "WORKOUT_COMPLETE_START_WORKOUT": "Start workout",
+    "WORKOUT_COMPLETE_SAVE": "Save and proceed later",
+    "WORKOUT_COMPLETE_CANCEL": "Cancel"
 }
