@@ -12,6 +12,7 @@ import 'moment/locale/ru';
 // Reducers
 import {reducers as ExercisesReducers} from './pages/exercises/exercises';
 import {reducers as ExercisesFilterReducers} from './pages/exercises-filter/exercises-filter';
+import {reducers as ExercisesListReducers} from './common/components/exercises-list/exercises-list.component';
 
 
 @Component({
@@ -23,7 +24,7 @@ import {reducers as ExercisesFilterReducers} from './pages/exercises-filter/exer
         deps: [Http]
       }),
       TranslateService,
-      provideStore(Object.assign({}, ExercisesReducers, ExercisesFilterReducers))
+      provideStore(Object.assign({}, ExercisesReducers, ExercisesFilterReducers, ExercisesListReducers))
    ]
 })
 export class MyApp {

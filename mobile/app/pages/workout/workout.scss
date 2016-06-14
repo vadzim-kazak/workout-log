@@ -1,2 +1,8 @@
 @import "./components/workout-common-info/workout-common-info";
 @import "./components/exercises-header/exercises-header";
+
+.Workout {
+    @include element(complete) {
+        @extend .CustomFab;
+    }
+}

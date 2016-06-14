@@ -2,10 +2,18 @@
 
 <workout-common-info></workout-common-info>
 
-<workout-exercises-header [exercises]="exercises"></workout-exercises-header>
-
+<workout-exercises-header></workout-exercises-header>
 <ion-content>
+    <exercises-list [exercises]="exercisesSelected"
+                    [exercisesSelected]="exercisesSelected" 
+                    [isWorkoutCreationFlow]="true"
+                    [showActionButton]="false"></exercises-list>
 </ion-content>   
+
+<button *ngIf="(exercisesSelected | async).length > 0" class="Workout-complete" primary fab fab-right fab-bottom>
+    <ion-icon name="done-all"></ion-icon>
+</button>
+
 
           
 

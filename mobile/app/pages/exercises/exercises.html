@@ -1,11 +1,8 @@
 <exercises-navbar (searchExercises)="searchExercises($event)" [isWorkoutCreationFlow]="isWorkoutCreationFlow"></exercises-navbar>
 
 <ion-content #exercisesList>
-   <exercises-list (exerciseSelect)="selectExercise($event)"
-                   (exerciseUnselect)="unselectExercise($event)"  
-                   (completeExerciseSelection)="completeExerciseSelectionHandler()"
+   <exercises-list (completeExerciseSelection)="completeExerciseSelectionHandler()"
                    [exercises]="exercises"
-                   [exercisesSelected]="exercisesSelected" 
                    [isWorkoutCreationFlow]="isWorkoutCreationFlow"></exercises-list>
 </ion-content>
 

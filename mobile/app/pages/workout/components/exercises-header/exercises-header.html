@@ -1,6 +1,13 @@
 <div class="WorkoutExercisesHeader">
-    <ion-label>{{'WORKOUT_EXERCISES' | translate}}</ion-label>
-    <button (click)="forwardToExercises()" fab fab-right secondary class="WorkoutExercisesHeader-addButton">
-        <ion-icon name="add"></ion-icon>
-    </button>
+    <ion-row center>
+        <ion-col>
+            <ion-label>{{'WORKOUT_EXERCISES' | translate}}</ion-label>
+        </ion-col>
+        <ion-col text-right>
+            <button (click)="forwardToExercises()" secondary clear>
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-col>
+    </ion-row>        
+    
 </div>

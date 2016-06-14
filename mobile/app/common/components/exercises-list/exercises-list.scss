@@ -1,9 +1,11 @@
+@import "./components/exercises-list-item/exercises-list-item";
+
 .ExercisesList {
    @include element(category) {
         color:  color($colors, primary);         
    }
 
    @include element(completeSelectionButton) {
-       z-index:100;
+        @extend .CustomFab;
    }
 }

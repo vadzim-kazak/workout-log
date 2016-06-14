@@ -1,15 +1,12 @@
 .WorkoutExercisesHeader {
     position:relative;
-    background: #f1f1f1; 
+    background: #ddd; 
     padding-left: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 1.7rem;
     margin-top: 0px;
     margin-bottom: 0px;
-    z-index:100;
-
-    @include element(addButton){
-        bottom: -32px;
-    }
+    padding-top: 0px;
+    padding-bottom: 0px;  
 }

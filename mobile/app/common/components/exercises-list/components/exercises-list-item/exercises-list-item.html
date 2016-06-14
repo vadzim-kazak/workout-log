@@ -11,13 +11,13 @@
             <ion-col text-right *ngIf="isWorkoutCreationFlow">
                 
                 <button *ngIf="!isSelected" small clear 
-                        (click)="selectExercise($event,exercise.id)" 
+                        (click)="selectExercise($event,exercise)" 
                         class="ExerciseItemHeader-addButton">
                     <ion-icon  name='add-circle' class="ExerciseItemHeader-addIcon" ></ion-icon>
                 </button>
 
                 <button *ngIf="isSelected" small clear 
-                        (click)="unselectExercise($event,exercise.id)"
+                        (click)="unselectExercise($event,exercise)"
                         class="ExerciseItemHeader-addButton">
                     <ion-icon *ngIf="isSelected" name='remove-circle' 
                               class="ExerciseItemHeader-addIcon ExerciseItemHeader-addIcon--selected"></ion-icon>

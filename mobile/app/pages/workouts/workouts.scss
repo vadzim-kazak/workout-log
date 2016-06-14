@@ -1,9 +1,7 @@
 @import "./components/day-item/day-item";
 
-.Workouts{
-
+.Workouts {
     @include element(add) {
-        z-index:100;
+        @extend .CustomFab;
     }
-
 }

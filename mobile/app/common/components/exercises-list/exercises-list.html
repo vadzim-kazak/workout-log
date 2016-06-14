@@ -1,0 +1,24 @@
+<ion-content>
+  <ion-list *ngIf="(exercises | async) && (exercises | async).length > 0" [virtualScroll]="exercises | async"
+            [headerFn]="exerciseGroupHeader" class="ExercisesList" no-lines>
+        
+        <ion-item-divider *virtualHeader="let header" light>
+          <b class="ExercisesList-category">{{header | normalize | uppercase }}</b>
+        </ion-item-divider>
+        
+        <ion-item *virtualItem="let exercise">
+            
+            <exercises-list-item [exercise]="exercise" 
+                                 [isWorkoutCreationFlow]="isWorkoutCreationFlow"
+                                 [isSelected]="checkExerciseSelection(exercise.id)"
+                                 (exerciseSelect)="selectExercise(exercise)"
+                                 (exerciseUnselect)="unselectExercise(exercise)"></exercises-list-item>  
+        </ion-item>
+  </ion-list>
+</ion-content>
+
+<button *ngIf="isWorkoutCreationFlow && showActionButton && (exercisesSelected | async) && (exercisesSelected | async).length > 0" 
+         class="ExercisesList-completeSelectionButton" primary fab fab-right fab-bottom
+        (click)="completeExerciseSelection.emit()">
+    <ion-icon name="checkmark"></ion-icon>
+</button>

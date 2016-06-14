@@ -15,7 +15,7 @@ export class WorkoutExercisesHeader {
   constructor(private navController: NavController) {}
 
   forwardToExercises() {
-    this.navController.push(Exercises, {isWorkoutCreationFlow: true, exercises: this.exercises});
+    this.navController.push(Exercises, {isWorkoutCreationFlow: true});
   }
   
 }

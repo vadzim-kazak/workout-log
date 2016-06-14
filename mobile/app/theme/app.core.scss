@@ -8,6 +8,7 @@
 // App Shared Sass variables belong in app.variables.scss.
 
 @import "../common/styles/bem.scss";
+@import "../common/styles/fab.scss";
 
 @import "../pages/exercises/exercises";
 @import "../pages/exercise/exercise";
@@ -15,4 +16,5 @@
 @import "../pages/page3/page3";
 @import "../pages/workouts/workouts";
 @import "../pages/workout/workout";
+@import "../common/components/exercises-list/exercises-list"
 

@@ -10,10 +10,10 @@ import {ExercisesEffects} from './effects/load-exercises.effect';
 // Reducers
 import {exercisesReducer} from './reducers/exercises.reducer';
 import {exercisesSearchReducer} from './reducers/exercises-search.reducer';
-import {exercisesSelectedReducer} from './reducers/exercises-selected.reducer';
 // Components
 import {ExercisesNavbar} from './components/navbar/exercises-navbar.component';
-import {ExercisesList} from './components/list/exercises-list.component';
+//import {ExercisesList} from './components/list/exercises-list.component';
+import {ExercisesList} from '../../common/components/exercises-list/exercises-list.component';
 import {ExercisesFilter} from '../exercises-filter/exercises-filter';
 // Services
 import {ExercisesFilteringService} from './services/exercises-filtering.service';
@@ -21,7 +21,6 @@ import {ExercisesFilteringService} from './services/exercises-filtering.service'
 export const reducers = {
     exercises: exercisesReducer,
     exercisesSearchQuery: exercisesSearchReducer,
-    exercisesSelected: exercisesSelectedReducer
 }
 
 @Component({
@@ -37,7 +36,6 @@ export class Exercises {
   exercisesEffectsSubscription: Subscription;
   filteringCriteriaSubscription: Subscription;
   isWorkoutCreationFlow: boolean = false;
-  selectionResultContainer: {} 
   
   constructor(private store: Store<any>, exercisesEffects: ExercisesEffects, 
               filteringService: ExercisesFilteringService,
@@ -59,8 +57,6 @@ export class Exercises {
       if (worklightCreationFlowParam) {
           this.isWorkoutCreationFlow = true;
       } 
-
-      this.selectionResultContainer = navParams.get('exercises');
   }
   
   searchExercises($event) {
@@ -68,32 +64,10 @@ export class Exercises {
                           payload:  $event.value})
   }
   
-  selectExercise(exercisesId) {
-    this.store.dispatch({type: 'EXERCISE_SELECT', 
-                         payload:  exercisesId})
-  }
-
-  unselectExercise(exercisesId) {
-    this.store.dispatch({type: 'EXERCISE_UNSELECT', 
-                         payload:  exercisesId})
-  }
-
   completeExerciseSelectionHandler() {
-    
-    this.exercisesSelected.subscribe(selectedExercises =>
-      Object.keys(selectedExercises)
-          .forEach(selectedExerciseId => this.selectionResultContainer[selectedExerciseId] = true)
-    );
-    console.log(this.selectionResultContainer);
     this.navController.pop();
   }
 
-  ionViewWillEnter() {
-     if (this.isWorkoutCreationFlow) {
-       this.store.dispatch({type: 'EXERCISES_SELECTION_RESET'});
-     }
-  }
-  
   ngOnDestroy() {
     // Manually unsubscribe effect
     this.exercisesEffectsSubscription.unsubscribe();
