@@ -1,3 +1,8 @@
 <ion-row center>
+   <ion-col width-20 text-left>
     {{item.label}}
+   </ion-col>    
+   <ion-col width-80 text-center>
+       <div *ngIf="item.workouts && item.workouts.length > 0" style="background: #bbb; padding:5px;">{{item.workouts[0].name}}</div>
+   </ion-col>
 </ion-row>

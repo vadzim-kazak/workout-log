@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {Store} from '@ngrx/store';
+import {Observable, Subscription} from 'rxjs';
 import {NavController} from 'ionic-angular';
 import * as moment from 'moment';
 import {WeeksHeader} from './components/weeks-header/weeks-header.component';
@@ -12,10 +14,31 @@ import {Workout} from '../workout/workout';
 export class Workouts {
   
   items = [];
+  workouts: any = [];
   
-  constructor(private navController: NavController) {
+  constructor(private navController: NavController, private store: Store<any>) {
     let lastWeekDay = moment().endOf('week');
     this.populateCalendarMonth(lastWeekDay);
+    // TODO unsubscription
+    store.select('workouts').subscribe(workouts => {
+      this.workouts = workouts
+
+      this.items.forEach(item => {
+
+           let assignedWorkouts = [];
+           this.workouts.forEach(workout => {
+            if (item.day.isSame(workout.startDate, 'day')) {
+              assignedWorkouts.push(workout);
+            }
+          });
+
+          if (assignedWorkouts.length > 0) {
+            item.workouts = assignedWorkouts;  
+          }
+
+      });
+    });
+	
   }
 
   weeksHeader(item, index, items) {
