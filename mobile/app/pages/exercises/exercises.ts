@@ -33,8 +33,7 @@ export class Exercises {
   
   exercises: Observable<any>;
   exercisesSelected: Observable<any>;
-  exercisesEffectsSubscription: Subscription;
-  filteringCriteriaSubscription: Subscription;
+  subscriptions: Subscription[] = [];
   isWorkoutCreationFlow: boolean = false;
   
   constructor(private store: Store<any>, exercisesEffects: ExercisesEffects, 
@@ -50,7 +49,7 @@ export class Exercises {
       this.exercisesSelected = store.select('exercisesSelected');
 
       // Manually run effect subscription
-      this.exercisesEffectsSubscription = exercisesEffects.load$.subscribe(store);
+      this.subscriptions.push(exercisesEffects.load$.subscribe(store));
       this.store.dispatch({type: 'LOAD_EXERCISES'});
 
       let worklightCreationFlowParam = navParams.get('isWorkoutCreationFlow');
@@ -69,8 +68,7 @@ export class Exercises {
   }
 
   ngOnDestroy() {
-    // Manually unsubscribe effect
-    this.exercisesEffectsSubscription.unsubscribe();
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
   
 }

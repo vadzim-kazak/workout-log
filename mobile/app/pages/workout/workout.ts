@@ -34,7 +34,7 @@ export class Workout {
   exercisesSelected: Observable<any>;
   isCustomNameSet: boolean = false;
 
-  exercisesSubscription: Subscription; 
+  subscriptions: Subscription[] = [];
 
   constructor(navParams: NavParams, private navController: NavController, 
               private store: Store<any>, public platform: Platform,
@@ -44,7 +44,7 @@ export class Workout {
       this.toolbarTitleKey = navParams.get('toolBarTitle');
 
       this.store.dispatch({type: 'EXERCISES_SELECTION_RESET'});
-      this.exercisesSubscription = this.exercisesSelected.subscribe(this.generateWorkoutName);        
+      this.subscriptions.push(this.exercisesSelected.subscribe(this.generateWorkoutName));        
   }
 
   completeWorkoutCreation() {
@@ -143,7 +143,9 @@ export class Workout {
 
    ngOnDestroy() {
     // Manually unsubscribe effect
-    this.exercisesSubscription.unsubscribe();
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();  
+    });
   }
   
 }

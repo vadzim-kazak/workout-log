@@ -34,18 +34,20 @@ export class ExercisesFilter {
     filterState;
     filterCategoriesState;
     filteringCriteria: Observable<any>;
-    filterStateSubscription: Subscription;
-    filterCategoriesStateSubscription:  Subscription;
-    filteringCriteriaSubscription: Subscription;
+    subscriptions: Subscription[] = [];
 
     constructor(private viewController: ViewController, private store: Store<any>, 
                 filteringCriteriaEffects: FilteringCriteriaEffects) {
       this.filteringCriteria = store.select('exercisesFilteringCriteria');
-      this.filterStateSubscription = store.select('exercisesFilter').subscribe(value => this.filterState = value);
-      this.filterCategoriesStateSubscription = store.select('exercisesFilterCategories').subscribe(state => this.filterCategoriesState = state);
+      
+      this.subscriptions.push(store.select('exercisesFilter')
+                                   .subscribe(value => this.filterState = value));
+      
+      this.subscriptions.push(store.select('exercisesFilterCategories')
+                                   .subscribe(state => this.filterCategoriesState = state));
 
       // Manually run effect subscription
-      this.filteringCriteriaSubscription = filteringCriteriaEffects.load$.subscribe(store);
+      this.subscriptions.push(filteringCriteriaEffects.load$.subscribe(store));
     }
     
     isFilterValueUnchecked(category, value) {
@@ -75,10 +77,7 @@ export class ExercisesFilter {
     }
 
     ngOnDestroy() {
-        this.filterStateSubscription.unsubscribe();
-        this.filterCategoriesStateSubscription.unsubscribe();
-        // Manually unsubscribe effect
-        this.filteringCriteriaSubscription.unsubscribe();
+       this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
     
 }   
