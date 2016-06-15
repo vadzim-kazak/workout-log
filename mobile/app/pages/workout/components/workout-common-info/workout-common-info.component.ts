@@ -12,12 +12,7 @@ import {Exercises} from '../../../exercises/exercises';
 export class WorkoutCommonInfo {
   
   // Default workout object
-  @Input() workout: any = {
-    name: '',
-    type: 'oneTime',
-    startDate: moment().format(),
-    customPeriod: 7 
-  };
+  @Input() workout: any = {};
   
   @Output() nameInputBlurEvent = new EventEmitter();
 
@@ -26,7 +21,7 @@ export class WorkoutCommonInfo {
   monthNames = moment.months().map(month => month.charAt(0).toUpperCase() + month.slice(1));
 
   // Dirty hack which allows to use ionic-datetime picker component for numbers selection
-  customPeriodTime = moment().set('hour', this.workout.customPeriod).format();
+  customPeriodTime = moment().set('hour', 7).format();
   pickerRange = [];
 
   constructor(navParams: NavParams, private navController: NavController) {

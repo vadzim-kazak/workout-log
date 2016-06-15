@@ -13,7 +13,7 @@ import {ExercisesList} from '../../common/components/exercises-list/exercises-li
 import {workoutReducer} from './reducers/workout.reducer';
 
 export const reducers = {
-    workouts: workoutReducer,
+    workouts: workoutReducer
 }
 
 @Component({
@@ -48,7 +48,24 @@ export class Workout {
   }
 
   completeWorkoutCreation() {
- 
+
+    let today = moment(); 
+    if (today.isSame(this.workout.startDate, 'day')) {
+      
+      // Workout has been created for today or starting from current day.
+      // So, there can be some options just to save workout or save & start it immediately
+      this.proposeCompleteWorkoutActions();
+
+    } else if(today.isBefore(this.workout.startDate, 'day')){
+
+      // Workout starting date in future. So, just saving workout and exit 
+      this.saveWorkout();
+    }  
+    
+  }
+
+  proposeCompleteWorkoutActions() {
+
     let actionSheet = ActionSheet.create({
       title: this.translate.instant('WORKOUT_COMPLETE_ACTIONS_TITLE'),
       buttons: [
@@ -80,6 +97,7 @@ export class Workout {
       ]
     });
     this.navController.present(actionSheet);
+
   }
 
   saveWorkout() {

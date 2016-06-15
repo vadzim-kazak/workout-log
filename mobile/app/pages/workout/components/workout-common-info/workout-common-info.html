@@ -20,7 +20,7 @@
                       [cancelText]="'DATE_TIME_PICKER_CANCEL_TEXT' | translate"
                       [doneText]= "'DATE_TIME_PICKER_DONE_TEXT' | translate" 
                       [hourValues]="pickerRange" 
-                      [(ngModel)]="workout.customPeriodTime"
+                      [(ngModel)]="customPeriodTime"
                       (ionChange)="fetchCustomPeriodTime($event)"></ion-datetime>
                         
         <!--<ion-label text-left>{{'WORKOUT_TYPE_CUSTOM_PERIOD_IN_DAYS' | translate}}: {{customPeriod}}</ion-label>
