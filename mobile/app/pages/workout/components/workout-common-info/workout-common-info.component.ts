@@ -13,9 +13,7 @@ export class WorkoutCommonInfo {
   
   // Default workout object
   @Input() workout: any = {};
-  
   @Output() nameInputBlurEvent = new EventEmitter();
-
 
   dayShortNames = moment.weekdaysMin();
   monthNames = moment.months().map(month => month.charAt(0).toUpperCase() + month.slice(1));

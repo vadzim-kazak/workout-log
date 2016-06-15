@@ -6,7 +6,7 @@
 
 <ion-content>
     
-    <ion-list [virtualScroll]="items" [headerFn]="weeksHeader">
+    <ion-list [virtualScroll]="schedule | async" [headerFn]="weeksHeader">
       
       <ion-item-divider *virtualHeader="let header">
         <weeks-header [header]="header"></weeks-header>

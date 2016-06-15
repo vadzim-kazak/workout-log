@@ -14,6 +14,7 @@ import {reducers as ExercisesReducers} from './pages/exercises/exercises';
 import {reducers as ExercisesFilterReducers} from './pages/exercises-filter/exercises-filter';
 import {reducers as ExercisesListReducers} from './common/components/exercises-list/exercises-list.component';
 import {reducers as WorkoutReducers} from './pages/workout/workout';
+import {reducers as ScheduleReducers} from './pages/schedule/schedule';
 
 @Component({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
@@ -27,7 +28,8 @@ import {reducers as WorkoutReducers} from './pages/workout/workout';
       provideStore(Object.assign({}, ExercisesReducers, 
                                      ExercisesFilterReducers, 
                                      ExercisesListReducers, 
-                                     WorkoutReducers))
+                                     WorkoutReducers,
+                                     ScheduleReducers))
    ]
 })
 export class MyApp {
