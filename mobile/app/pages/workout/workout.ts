@@ -9,8 +9,11 @@ import {Exercises} from '../exercises/exercises';
 import {WorkoutCommonInfo} from './components/workout-common-info/workout-common-info.component';
 import {WorkoutExercisesHeader} from './components/exercises-header/exercises-header.component';
 import {ExercisesList} from '../../common/components/exercises-list/exercises-list.component';
+import {StateUpdates} from '@ngrx/effects'
 // Reducers
 import {workoutReducer} from './reducers/workout.reducer';
+// Effects
+import {WorkoutEffects} from './effects/workouts-manager.effect';
 
 export const reducers = {
     workouts: workoutReducer
@@ -20,12 +23,14 @@ export const reducers = {
   templateUrl: 'build/pages/workout/workout.html',
   directives: [Toolbar, WorkoutCommonInfo, WorkoutExercisesHeader, ExercisesList],
   pipes: [TranslatePipe],
+  providers: [WorkoutEffects, StateUpdates]
 })
 export class Workout {
   
   workout: any = {
     name: '',
     type: 'oneTime',
+    state: 'template',     
     startDate: moment().format(),
     customPeriod: 7 
   };
@@ -38,13 +43,14 @@ export class Workout {
 
   constructor(navParams: NavParams, private navController: NavController, 
               private store: Store<any>, public platform: Platform,
-              private translate: TranslateService) {
+              private translate: TranslateService, workoutEffects: WorkoutEffects) {
       
       this.exercisesSelected = store.select('exercisesSelected');  
       this.toolbarTitleKey = navParams.get('toolBarTitle');
 
       this.store.dispatch({type: 'EXERCISES_SELECTION_RESET'});
-      this.subscriptions.push(this.exercisesSelected.subscribe(this.generateWorkoutName));        
+      this.subscriptions.push(this.exercisesSelected.subscribe(this.generateWorkoutName));  
+      this.subscriptions.push(workoutEffects.save$.subscribe(store));
   }
 
   completeWorkoutCreation() {
@@ -107,7 +113,6 @@ export class Workout {
                           .unsubscribe();
 
     this.store.dispatch({type: 'WORKOUT_CREATE', payload: this.workout});
-    console.log(this.workout);
     this.navController.pop();
   }
 

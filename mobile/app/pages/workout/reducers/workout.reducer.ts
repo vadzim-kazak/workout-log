@@ -17,6 +17,14 @@ export const workoutReducer = createReducer<Array<any>>([], {
         let filteredWorkouts = state.filter(current => current.id !== workoutId);
         
         return [...filteredWorkouts];
+    },
+
+    ['WORKOUTS_LOAD_SUCCESS'](state, action) {
+        
+        let workouts = action.payload;
+        return [...workouts];
     }
+
+
 
 });

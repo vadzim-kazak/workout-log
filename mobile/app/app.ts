@@ -9,6 +9,8 @@ import {TabsPage} from './pages/tabs/tabs';
 import {provideStore} from '@ngrx/store';
 import * as moment from 'moment';
 import 'moment/locale/ru';
+// Services
+import {ObjectLocalStorage} from './common/services/local-storage.service';
 // Reducers
 import {reducers as ExercisesReducers} from './pages/exercises/exercises';
 import {reducers as ExercisesFilterReducers} from './pages/exercises-filter/exercises-filter';
@@ -29,7 +31,8 @@ import {reducers as ScheduleReducers} from './pages/schedule/schedule';
                                      ExercisesFilterReducers, 
                                      ExercisesListReducers, 
                                      WorkoutReducers,
-                                     ScheduleReducers))
+                                     ScheduleReducers)),
+      ObjectLocalStorage
    ]
 })
 export class MyApp {

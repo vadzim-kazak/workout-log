@@ -12,15 +12,18 @@ import {Workout} from '../workout/workout';
 import {scheduleReducer} from './reducers/schedule.reducer';
 // Effects
 import {ScheduleEffects} from './effects/load-schedule.effect';
+import {WorkoutEffects} from '../workout/effects/workouts-manager.effect';
+// Services
+import {WorkoutsInjectorService} from './services/workouts-injector.service';
 
 export const reducers = {
-    schedule: scheduleReducer,
+    schedule: scheduleReducer
 }
 
 @Component({
   templateUrl: 'build/pages/schedule/schedule.html',
   directives: [WeeksHeader, DayItem],
-  providers: [StateUpdates, ScheduleEffects]
+  providers: [StateUpdates, ScheduleEffects, WorkoutEffects, WorkoutsInjectorService]
 })
 export class Schedule {
   
@@ -29,16 +32,24 @@ export class Schedule {
   subscriptions: Subscription[] = [];
 
   constructor(private navController: NavController, private store: Store<any>, 
-              private scheduleEffects: ScheduleEffects) {
+              private scheduleEffects: ScheduleEffects, 
+              workoutsInjectorService: WorkoutsInjectorService, workoutEffects: WorkoutEffects) {
     
-    this.schedule = store.select('schedule');
+    this.schedule = Observable.combineLatest(store.select('schedule'), 
+                                             store.select('workouts'),
+                                             workoutsInjectorService.process);
+    
     this.subscriptions.push(this.schedule.subscribe(days => this.scheduleDays = days));
     
     // Effects subscriptions
     this.subscriptions.push(scheduleEffects.load$.subscribe(store));
+    this.subscriptions.push(workoutEffects.load$.subscribe(store));
 
-    let lastWeekDay = moment().endOf('week');
+    //let lastWeekDay = moment().endOf('week');
+    let lastWeekDay = moment().endOf('week').add(1, 'days').endOf('week');
     store.dispatch({type: 'LOAD_SCHEDULE_BATCH', payload: {seedDay: lastWeekDay}});
+    // Loading workouts
+    store.dispatch({type: 'WORKOUTS_LOAD'});
   }
 
   weeksHeader(item, index, items) {
