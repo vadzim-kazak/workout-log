@@ -35,9 +35,10 @@ export class Workout {
     customPeriod: 7 
   };
 
-  toolbarTitleKey: string = 'WORKOUT_TOOLBAR_TITLE';  
+  toolbarTitle: string;  
   exercisesSelected: Observable<any>;
   isCustomNameSet: boolean = false;
+  isWorkoutCreationFlow: boolean = true;
 
   subscriptions: Subscription[] = [];
 
@@ -46,7 +47,16 @@ export class Workout {
               private translate: TranslateService, workoutEffects: WorkoutEffects) {
       
       this.exercisesSelected = store.select('exercisesSelected');  
-      this.toolbarTitleKey = navParams.get('toolBarTitle');
+
+      let providedWorkout = navParams.get('workout');
+      if (providedWorkout) {
+        this.workout = providedWorkout;
+        this.toolbarTitle = providedWorkout.name;
+        this.isWorkoutCreationFlow = false;
+        console.log(this.workout);
+      } else {
+        this.toolbarTitle = this.translate.instant('WORKOUT_NEW_TOOLBAR_TITLE');
+      }
 
       this.store.dispatch({type: 'EXERCISES_SELECTION_RESET'});
       this.subscriptions.push(this.exercisesSelected.subscribe(this.generateWorkoutName));  
@@ -145,8 +155,8 @@ export class Workout {
                                          .join(', ');
     }
   }
-
-   ngOnDestroy() {
+  
+  ngOnDestroy() {
     // Manually unsubscribe effect
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();  

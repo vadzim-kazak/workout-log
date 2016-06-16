@@ -3,6 +3,22 @@
     {{item.label}}
    </ion-col>    
    <ion-col width-80 text-center>
-       <div *ngIf="item.workouts && item.workouts.length > 0" style="background: #bbb; padding:5px;">{{item.workouts[0].name}}</div>
+        
+        <ion-card *ngFor="let workout of item.workouts"
+                  (click)="proceedToWorkout.emit({workout:workout,day:item.day})" 
+                  class="DayItemWorkout">
+            
+            <ion-card-content [class.DayItemWorkout-templateHeader]="workout.state === 'template'" text-center>
+                <ion-row center>
+                    <ion-col width-90>{{workout.name}}</ion-col>
+                    <ion-col width-10 text-right>
+                        <button small clear (click)="handleTemplateActionsClick({workout:workout,day:item.day},$event)">
+                            <ion-icon name="more"></ion-icon>
+                        </button>    
+                    </ion-col>    
+                </ion-row>
+            </ion-card-content>
+        </ion-card>
+
    </ion-col>
 </ion-row>

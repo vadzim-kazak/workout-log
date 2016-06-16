@@ -1,13 +1,16 @@
-<toolbar [title]="toolbarTitleKey | translate"></toolbar>
+<toolbar [title]="toolbarTitle"></toolbar>
 
 <workout-common-info [workout]="workout" (nameInputBlurEvent)="checkCustomNameProvision()"></workout-common-info>
 
 <workout-exercises-header></workout-exercises-header>
 <ion-content>
-    <exercises-list [exercises]="exercisesSelected"
+    
+    <exercises-list *ngIf="isWorkoutCreationFlow"
+                    [exercises]="exercisesSelected"
                     [exercisesSelected]="exercisesSelected" 
-                    [isWorkoutCreationFlow]="true"
+                    isWorkoutCreationFlow="true"
                     [showActionButton]="false"></exercises-list>
+
 </ion-content>   
 
 <button *ngIf="(exercisesSelected | async).length > 0" 

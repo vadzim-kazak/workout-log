@@ -5,3 +5,25 @@
         @extend .CustomFab;
     }
 }
+
+.WorkoutAction {
+
+    @include element(delete) {
+        ion-icon {
+             color: color($colors, danger);        
+        }
+    }
+
+    @include element(edit) {
+         ion-icon {
+             color: color($colors, secondary);        
+        }
+    }
+
+    @include element(cancel) {
+         ion-icon {
+             color: color($colors, danger);        
+        }
+    }
+
+}

@@ -79,5 +79,14 @@
     "WORKOUT_COMPLETE_ACTIONS_TITLE": "Завершение создания тренировки",
     "WORKOUT_COMPLETE_START_WORKOUT": "Начать тренировку",
     "WORKOUT_COMPLETE_SAVE": "Сохранить и продолжить позже",
-    "WORKOUT_COMPLETE_CANCEL": "Отмена"
+    "WORKOUT_COMPLETE_CANCEL": "Отмена",
+
+    "WORKOUT_TEMPLATE_ACTIONS_TITLE": "Выбор действия",
+    "WORKOUT_TEMPLATE_ACTIONS_EDIT": "Редактирование тренировки",
+    "WORKOUT_TEMPLATE_ACTIONS_DELETE": "Удаление тренировки",
+    "WORKOUT_TEMPLATE_ACTIONS_EDIT_CURRENT": "Редактирование текущей тренировки",
+    "WORKOUT_TEMPLATE_ACTIONS_DELETE_CURRENT": "Удаление текущей тренировки",   
+    "WORKOUT_TEMPLATE_ACTIONS_EDIT_ALL": "Редактирование всех тренировок данного типа",
+    "WORKOUT_TEMPLATE_ACTIONS_DELETE_ALL": "Удаление всех тренировок данного типа",
+    "WORKOUT_TEMPLATE_ACTIONS_CANCEL": "Отмена"
 }

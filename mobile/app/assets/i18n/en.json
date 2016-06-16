@@ -79,5 +79,14 @@
     "WORKOUT_COMPLETE_ACTIONS_TITLE": "Complete workout creation",
     "WORKOUT_COMPLETE_START_WORKOUT": "Start workout",
     "WORKOUT_COMPLETE_SAVE": "Save and proceed later",
-    "WORKOUT_COMPLETE_CANCEL": "Cancel"
+    "WORKOUT_COMPLETE_CANCEL": "Cancel",
+
+    "WORKOUT_TEMPLATE_ACTIONS_TITLE": "Choose action",
+    "WORKOUT_TEMPLATE_ACTIONS_EDIT": "Edit workout",
+    "WORKOUT_TEMPLATE_ACTIONS_DELETE": "Delete workout",
+    "WORKOUT_TEMPLATE_ACTIONS_EDIT_CURRENT": "Edit only current workout",
+    "WORKOUT_TEMPLATE_ACTIONS_DELETE_CURRENT": "Delete only current workout",   
+    "WORKOUT_TEMPLATE_ACTIONS_EDIT_ALL": "Edit all workouts of this type",
+    "WORKOUT_TEMPLATE_ACTIONS_DELETE_ALL": "Delete all workouts of this type",
+    "WORKOUT_TEMPLATE_ACTIONS_CANCEL": "Cancel"
 }

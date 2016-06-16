@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable, Subscription} from 'rxjs';
-import {NavController} from 'ionic-angular';
+import {NavController, ActionSheet, Platform} from 'ionic-angular';
 import * as moment from 'moment';
 import {StateUpdates} from '@ngrx/effects'
+import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 // Components
 import {WeeksHeader} from './components/weeks-header/weeks-header.component';
 import {DayItem} from './components/day-item/day-item.component';
@@ -33,7 +34,9 @@ export class Schedule {
 
   constructor(private navController: NavController, private store: Store<any>, 
               private scheduleEffects: ScheduleEffects, 
-              workoutsInjectorService: WorkoutsInjectorService, workoutEffects: WorkoutEffects) {
+              workoutsInjectorService: WorkoutsInjectorService, workoutEffects: WorkoutEffects,
+              private translate: TranslateService,
+              private platform: Platform) {
     
     this.schedule = Observable.combineLatest(store.select('schedule'), 
                                              store.select('workouts'),
@@ -82,7 +85,83 @@ export class Schedule {
   }
 
   addWorkoutClickHandler() {
-    this.navController.push(Workout, {toolBarTitle: 'WORKOUT_NEW_TOOLBAR_TITLE'});
+    this.navController.push(Workout);
+  }
+
+  proceedToWorkout({workout, day}) {
+    let workoutToProceed = workout; 
+    if (workoutToProceed.state === 'template') {
+      workoutToProceed = Object.assign({}, workout);
+      workoutToProceed.state = 'active';
+      workoutToProceed.startDate = moment(day).format();
+    }
+    this.navController.push(Workout, {workout: workoutToProceed});  
+  }
+
+  showTemplateActions({workout, day}) {
+
+    let deleteButton = (message, handler) => {
+      return {
+          text: this.translate.instant(message),
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          cssClass: 'WorkoutAction-delete',
+          handler
+        } 
+    }
+
+    let editButton = (message, handler) => {
+      return {
+          text: this.translate.instant(message),
+          icon: !this.platform.is('ios') ? 'create' : null,
+          cssClass: 'WorkoutAction-edit',
+          handler
+        } 
+    }
+    
+    let buttons = [];
+    if (workout.type === 'oneTime') {
+      buttons.push(
+        deleteButton('WORKOUT_TEMPLATE_ACTIONS_DELETE', () => {})  
+      );  
+    } else {
+      buttons.push(
+        deleteButton('WORKOUT_TEMPLATE_ACTIONS_DELETE_CURRENT', () => {})  
+      );
+      buttons.push(
+        deleteButton('WORKOUT_TEMPLATE_ACTIONS_DELETE_ALL', () => {})  
+      );
+    }
+
+    if (workout.type === 'oneTime') {
+      buttons.push(
+        editButton('WORKOUT_TEMPLATE_ACTIONS_EDIT', () => {})  
+      );  
+    } else {
+      buttons.push(
+        editButton('WORKOUT_TEMPLATE_ACTIONS_EDIT_CURRENT', () => {})  
+      );
+      buttons.push(
+        editButton('WORKOUT_TEMPLATE_ACTIONS_EDIT_ALL', () => {})  
+      );
+    }
+
+    buttons.push(
+      {
+          text: this.translate.instant('WORKOUT_TEMPLATE_ACTIONS_CANCEL'),
+          role: 'cancel',
+          cssClass: 'WorkoutAction-cancel',
+          icon:  !this.platform.is('ios') ? 'close' : null,
+          handler: () => {}
+      }
+    );    
+    
+    let actionSheet = ActionSheet.create({
+      title: this.translate.instant('WORKOUT_TEMPLATE_ACTIONS_TITLE'),
+      buttons
+    });
+    this.navController.present(actionSheet);
+
   }
 
   ngOnDestroy() {

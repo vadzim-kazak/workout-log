@@ -37,5 +37,9 @@ export class WorkoutCommonInfo {
   fetchCustomPeriodTime($event) {
     this.workout.customPeriod = $event.hour.value;   
   }
+
+  isTemplate() {
+    return this.workout.state === 'template';
+  }
   
 }

@@ -1,6 +1,9 @@
-.DayItem {
-    @include element(addWorkout){
-        color:  color($colors, secondary);
-        font-size: 2rem;
+.DayItemWorkout {
+    
+    @include element(templateHeader){
+        background: #eee;
+        padding: 5px;
     }
 }
+
+

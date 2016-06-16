@@ -10,7 +10,14 @@ import {Observable} from 'rxjs';
 export class DayItem {
   
   @Input() item;
+  @Output() proceedToWorkout = new EventEmitter();
+  @Output() templateActions = new EventEmitter();
 
   constructor() {}
+
+  handleTemplateActionsClick(payload, $event) {
+    $event.stopPropagation();
+    this.templateActions.emit(payload);
+  }
 
 }

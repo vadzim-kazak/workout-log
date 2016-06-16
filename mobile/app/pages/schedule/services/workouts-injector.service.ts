@@ -12,6 +12,12 @@ export class WorkoutsInjectorService {
             });
         });
 
+        scheduleDays.forEach(scheduleDay => {
+            if (scheduleDay.workouts && scheduleDay.workouts.length > 0) {
+                console.log(scheduleDay);   
+            }
+        });
+        
         return scheduleDays;
     }
 
