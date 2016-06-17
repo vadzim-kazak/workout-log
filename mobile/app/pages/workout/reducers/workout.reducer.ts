@@ -11,10 +11,39 @@ export const workoutReducer = createReducer<Array<any>>([], {
         return [...state, workout];
     },
 
+     ['WORKOUT_UPDATE'](state, action) {
+        
+        let workout = action.payload;
+        let updatedWorkouts = state.map(current => {
+            if (current.id === workout.id) {
+                return Object.assign({}, workout);
+            } else {
+                return current;
+            }
+        })
+
+        return [...updatedWorkouts];
+    },
+
     ['WORKOUT_DELETE'](state, action) {
         
-        let workoutId = action.payload;
-        let filteredWorkouts = state.filter(current => current.id !== workoutId);
+        let workout = action.payload;
+        let filteredWorkouts = state.filter(current => {
+
+            if (current.id === workout.id) {
+                return false;
+            }
+
+            if (workout.type !== 'oneTime' && 
+                current.templateId && current.templateId == workout.id && 
+                current.state === 'deleted') {
+                
+                return false;
+            }
+
+            return true;
+
+        });
         
         return [...filteredWorkouts];
     },

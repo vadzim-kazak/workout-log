@@ -16,6 +16,7 @@ import {ScheduleEffects} from './effects/load-schedule.effect';
 import {WorkoutEffects} from '../workout/effects/workouts-manager.effect';
 // Services
 import {WorkoutsInjectorService} from './services/workouts-injector.service';
+import {WorkoutsActionsProvider} from './services/workouts-actions.provider';
 
 export const reducers = {
     schedule: scheduleReducer
@@ -24,7 +25,7 @@ export const reducers = {
 @Component({
   templateUrl: 'build/pages/schedule/schedule.html',
   directives: [WeeksHeader, DayItem],
-  providers: [StateUpdates, ScheduleEffects, WorkoutEffects, WorkoutsInjectorService]
+  providers: [StateUpdates, ScheduleEffects, WorkoutEffects, WorkoutsInjectorService, WorkoutsActionsProvider]
 })
 export class Schedule {
   
@@ -36,7 +37,7 @@ export class Schedule {
               private scheduleEffects: ScheduleEffects, 
               workoutsInjectorService: WorkoutsInjectorService, workoutEffects: WorkoutEffects,
               private translate: TranslateService,
-              private platform: Platform) {
+              private platform: Platform, private workoutsActionsProvider: WorkoutsActionsProvider) {
     
     this.schedule = Observable.combineLatest(store.select('schedule'), 
                                              store.select('workouts'),
@@ -47,6 +48,7 @@ export class Schedule {
     // Effects subscriptions
     this.subscriptions.push(scheduleEffects.load$.subscribe(store));
     this.subscriptions.push(workoutEffects.load$.subscribe(store));
+    this.subscriptions.push(workoutEffects.save$.subscribe(store));
 
     //let lastWeekDay = moment().endOf('week');
     let lastWeekDay = moment().endOf('week').add(1, 'days').endOf('week');
@@ -99,69 +101,8 @@ export class Schedule {
   }
 
   showTemplateActions({workout, day}) {
-
-    let deleteButton = (message, handler) => {
-      return {
-          text: this.translate.instant(message),
-          role: 'destructive',
-          icon: !this.platform.is('ios') ? 'trash' : null,
-          cssClass: 'WorkoutAction-delete',
-          handler
-        } 
-    }
-
-    let editButton = (message, handler) => {
-      return {
-          text: this.translate.instant(message),
-          icon: !this.platform.is('ios') ? 'create' : null,
-          cssClass: 'WorkoutAction-edit',
-          handler
-        } 
-    }
-    
-    let buttons = [];
-    if (workout.type === 'oneTime') {
-      buttons.push(
-        deleteButton('WORKOUT_TEMPLATE_ACTIONS_DELETE', () => {})  
-      );  
-    } else {
-      buttons.push(
-        deleteButton('WORKOUT_TEMPLATE_ACTIONS_DELETE_CURRENT', () => {})  
-      );
-      buttons.push(
-        deleteButton('WORKOUT_TEMPLATE_ACTIONS_DELETE_ALL', () => {})  
-      );
-    }
-
-    if (workout.type === 'oneTime') {
-      buttons.push(
-        editButton('WORKOUT_TEMPLATE_ACTIONS_EDIT', () => {})  
-      );  
-    } else {
-      buttons.push(
-        editButton('WORKOUT_TEMPLATE_ACTIONS_EDIT_CURRENT', () => {})  
-      );
-      buttons.push(
-        editButton('WORKOUT_TEMPLATE_ACTIONS_EDIT_ALL', () => {})  
-      );
-    }
-
-    buttons.push(
-      {
-          text: this.translate.instant('WORKOUT_TEMPLATE_ACTIONS_CANCEL'),
-          role: 'cancel',
-          cssClass: 'WorkoutAction-cancel',
-          icon:  !this.platform.is('ios') ? 'close' : null,
-          handler: () => {}
-      }
-    );    
-    
-    let actionSheet = ActionSheet.create({
-      title: this.translate.instant('WORKOUT_TEMPLATE_ACTIONS_TITLE'),
-      buttons
-    });
+    let actionSheet = ActionSheet.create(this.workoutsActionsProvider.getActionsConfig(workout, day));
     this.navController.present(actionSheet);
-
   }
 
   ngOnDestroy() {

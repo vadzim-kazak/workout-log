@@ -7,18 +7,14 @@ export class WorkoutsInjectorService {
     process = (scheduleDays: any[], workouts: any[]) => {
 
         scheduleDays.forEach(scheduleDay => {
+            // Resetting workouts for each schedule day
+            scheduleDay.workouts = [];
             workouts.forEach(workout => {
                 this.processWorkoutDayPair(scheduleDay, workout);    
             });
         });
-
-        scheduleDays.forEach(scheduleDay => {
-            if (scheduleDay.workouts && scheduleDay.workouts.length > 0) {
-                console.log(scheduleDay);   
-            }
-        });
         
-        return scheduleDays;
+        return [...scheduleDays.map(day => Object.assign({}, day))];
     }
 
     processWorkoutDayPair(scheduleDay, workout) {
@@ -46,33 +42,59 @@ export class WorkoutsInjectorService {
 
     processPeriodicWorkoutDayPair(scheduleDay, workout) {
 
-        if (workout.state !== 'template' && 
-            scheduleDay.day.isSame(workout.startDate, 'day')) {
-            // Workout is active and contains some records, so it can be shown witout any restrictions at any time              
-            this.assignWorkout(scheduleDay, workout);
-            return;
-        }
+        if (workout.state !== 'deleted') {
 
-        if (workout.state === 'template' && (<any>moment()).isSameOrBefore(scheduleDay.day, 'day')) {
-            // Handling template workout
-            let workoutStartDate = moment(workout.startDate);
-            let daysDelta = scheduleDay.day.diff(workoutStartDate, 'days');
-            if (daysDelta % workout.customPeriod === 0) {
-                  this.assignWorkout(scheduleDay, workout);   
+            if (workout.state !== 'template' && 
+                scheduleDay.day.isSame(workout.startDate, 'day')) {
+                // Workout is active and contains some records, so it can be shown witout any restrictions at any time              
+                this.assignWorkout(scheduleDay, workout);
+                return;
             }
-        }
 
+            if (workout.state === 'template' && (<any>moment()).isSameOrBefore(scheduleDay.day, 'day')) {
+                // Handling template workout
+                let workoutStartDate = moment(workout.startDate);
+                let daysDelta = scheduleDay.day.diff(workoutStartDate, 'days');
+                if (daysDelta % workout.customPeriod === 0) {
+                    this.assignWorkout(scheduleDay, workout);   
+                }
+            }
+
+        }
     }
 
     assignWorkout(scheduleDay, workout) {
+        
         if (!scheduleDay.workouts) {
             scheduleDay.workouts = [];
         }
         
-        if (!scheduleDay.workouts.some(current => current.name === workout.name)) {
-            // there is no workouts with the same name during this day
-            scheduleDay.workouts.push(workout); 
+        if (!this.checkWorkoutPresense(scheduleDay, workout)) {
+             
+             scheduleDay.workouts.push(workout);
+             if (workout.templateId) {
+                
+                scheduleDay.workouts = 
+                    scheduleDay.workouts.filter(current => current.id !== workout.templateId);
+             } 
         }
+    }
+
+    checkWorkoutPresense(scheduleDay, workout) {
+
+        return scheduleDay.workouts.some(current => {
+                
+                if (current.id === workout.id) {
+                    return true;
+                }
+
+                // Delete template case
+                if (current.templateId && current.templateId === workout.id) {
+                    return true;
+                }
+
+                return false;
+            });
     }
     
 }

@@ -5,11 +5,12 @@
 <workout-exercises-header></workout-exercises-header>
 <ion-content>
     
-    <exercises-list *ngIf="isWorkoutCreationFlow"
+    <exercises-list *ngIf="workout.state === 'template'"
                     [exercises]="exercisesSelected"
                     [exercisesSelected]="exercisesSelected" 
                     isWorkoutCreationFlow="true"
                     [showActionButton]="false"></exercises-list>
+
 
 </ion-content>   
 

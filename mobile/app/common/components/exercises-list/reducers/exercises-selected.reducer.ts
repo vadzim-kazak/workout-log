@@ -15,6 +15,9 @@ export const exercisesSelectedReducer = createReducer<Array<any>>([], {
 
     ['EXERCISES_SELECTION_RESET'](state, action) {
         return [];
-    }
+    },
 
+    ['EXERCISES_SELECTION_POPULATE'](state, action) {
+        return [...action.payload];
+    }
 });

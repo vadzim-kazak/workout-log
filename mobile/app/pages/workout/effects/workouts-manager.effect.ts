@@ -12,16 +12,14 @@ export class WorkoutEffects {
 
   @Effect() 
   save$ = this.updates$
-          .whenAction('WORKOUT_CREATE')
+          .whenAction('WORKOUT_CREATE', 'WORKOUT_DELETE')
           .map(payload => {
             let {workouts} = payload.state; 
             this.objectLocalStorage.set(STORAGE_WORKOUTS_KEY, workouts); 
 
              return {};
           });
-         
 
-  
   @Effect() 
   load$ = this.updates$
           .whenAction('WORKOUTS_LOAD')
@@ -33,7 +31,7 @@ export class WorkoutEffects {
                                 result = workouts;    
                             }
 
-                            return  {type: 'WORKOUTS_LOAD_SUCCESS', payload:workouts};
+                            return  {type: 'WORKOUTS_LOAD_SUCCESS', payload:result};
                         })
                         .catch(() => Observable.of({ type: 'WORKOUTS_LOAD_SUCCESS_FAILED' }))
           );

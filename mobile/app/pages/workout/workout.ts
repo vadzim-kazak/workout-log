@@ -14,6 +14,8 @@ import {StateUpdates} from '@ngrx/effects'
 import {workoutReducer} from './reducers/workout.reducer';
 // Effects
 import {WorkoutEffects} from './effects/workouts-manager.effect';
+// Services
+import {WorkoutActionsProvider} from './services/workout-actions.provider';
 
 export const reducers = {
     workouts: workoutReducer
@@ -23,7 +25,7 @@ export const reducers = {
   templateUrl: 'build/pages/workout/workout.html',
   directives: [Toolbar, WorkoutCommonInfo, WorkoutExercisesHeader, ExercisesList],
   pipes: [TranslatePipe],
-  providers: [WorkoutEffects, StateUpdates]
+  providers: [WorkoutEffects, StateUpdates, WorkoutActionsProvider]
 })
 export class Workout {
   
@@ -44,21 +46,31 @@ export class Workout {
 
   constructor(navParams: NavParams, private navController: NavController, 
               private store: Store<any>, public platform: Platform,
-              private translate: TranslateService, workoutEffects: WorkoutEffects) {
+              private translate: TranslateService, workoutEffects: WorkoutEffects,
+              private workoutActionsProvider: WorkoutActionsProvider) {
       
       this.exercisesSelected = store.select('exercisesSelected');  
+      this.exercisesSelected.subscribe(bla => console.log(bla));
 
       let providedWorkout = navParams.get('workout');
       if (providedWorkout) {
+        this.isCustomNameSet = true;
+        
         this.workout = providedWorkout;
         this.toolbarTitle = providedWorkout.name;
         this.isWorkoutCreationFlow = false;
-        console.log(this.workout);
+
+        if (this.workout.state === 'template') {
+          // Workout edit mode
+          this.store.dispatch({type: 'EXERCISES_SELECTION_POPULATE', payload:this.workout.exercises});
+        } 
+
       } else {
+        // Workout creation mode 
         this.toolbarTitle = this.translate.instant('WORKOUT_NEW_TOOLBAR_TITLE');
+        this.store.dispatch({type: 'EXERCISES_SELECTION_RESET'});
       }
 
-      this.store.dispatch({type: 'EXERCISES_SELECTION_RESET'});
       this.subscriptions.push(this.exercisesSelected.subscribe(this.generateWorkoutName));  
       this.subscriptions.push(workoutEffects.save$.subscribe(store));
   }
@@ -81,48 +93,24 @@ export class Workout {
   }
 
   proposeCompleteWorkoutActions() {
-
-    let actionSheet = ActionSheet.create({
-      title: this.translate.instant('WORKOUT_COMPLETE_ACTIONS_TITLE'),
-      buttons: [
-        {
-          text: this.translate.instant('WORKOUT_COMPLETE_START_WORKOUT'),
-          icon: !this.platform.is('ios') ? 'play' : null,
-          cssClass: 'Workout-start',
-          handler: () => {
-            
-          }
-        },
-        {
-          text: this.translate.instant('WORKOUT_COMPLETE_SAVE'),
-          icon:  !this.platform.is('ios') ? 'list' : null,
-          cssClass: 'Workout-save',
-          handler: () => {
-            this.saveWorkout();  
-          }
-        },
-        {
-          text: this.translate.instant('WORKOUT_COMPLETE_CANCEL'),
-          role: 'cancel',
-          cssClass: 'Workout-cancel',
-          icon:  !this.platform.is('ios') ? 'close' : null,
-          handler: () => {
-            
-          }
-        }
-      ]
-    });
+    let actionSheet = ActionSheet.create(this.workoutActionsProvider.getActionsConfig(null, this.saveWorkout));
     this.navController.present(actionSheet);
-
   }
 
-  saveWorkout() {
+  saveWorkout = () => {
     
     // Populate workout by selected exercises
     this.exercisesSelected.subscribe(selectedExercises => this.workout.exercises = selectedExercises)
                           .unsubscribe();
 
-    this.store.dispatch({type: 'WORKOUT_CREATE', payload: this.workout});
+    if (this.workout.id) {
+        // Workout edit flow
+        this.store.dispatch({type: 'WORKOUT_UPDATE', payload: this.workout});
+    } else {
+        // Workout create flow or edit of some particular periodic workout
+        this.store.dispatch({type: 'WORKOUT_CREATE', payload: this.workout});
+    }
+    
     this.navController.pop();
   }
 
