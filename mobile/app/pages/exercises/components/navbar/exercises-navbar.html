@@ -9,7 +9,8 @@
     </div>
     
     <!-- Search inactive state -->
-    <ion-title *ngIf="!isSearchActive">{{'NAVBAR_APP_NAME' | translate}}</ion-title>  
+    <ion-title *ngIf="!isSearchActive">{{isWorkoutCreationFlow ? ('WORKOUT_EXERCISES_SELECTION_TOOLBAR_TITLE' | translate) : 
+                                                                 ('NAVBAR_APP_NAME' | translate)}}</ion-title>  
     
     <ion-buttons *ngIf="!isSearchActive" end>    
         <button (click)="toggleSearchMode()">

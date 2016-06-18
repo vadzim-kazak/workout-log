@@ -75,6 +75,7 @@
     "WORKOUT_ONE_TIME_DATE": "Date",
     "WORKOUT_PERIODIC_FIRST_DATE": "First workout date",
     "WORKOUT_EXERCISES": "Exercises",
+    "WORKOUT_EXERCISES_SELECTION_TOOLBAR_TITLE": "Exercises selection",
 
     "WORKOUT_COMPLETE_ACTIONS_TITLE": "Complete workout creation",
     "WORKOUT_COMPLETE_START_WORKOUT": "Start workout",
