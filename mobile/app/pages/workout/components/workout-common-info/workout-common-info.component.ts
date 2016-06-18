@@ -18,11 +18,16 @@ export class WorkoutCommonInfo {
   dayShortNames = moment.weekdaysMin();
   monthNames = moment.months().map(month => month.charAt(0).toUpperCase() + month.slice(1));
 
+  workoutTypes = [{value:'oneTime', label:this.translate.instant('WORKOUT_TYPE_ONE_TIME')},
+                  {value:'weekly', label:this.translate.instant('WORKOUT_TYPE_WEEKLY')},
+                  {value:'customPeriod', label:this.translate.instant('WORKOUT_TYPE_CUSTOM_PERIOD')}];
+
   // Dirty hack which allows to use ionic-datetime picker component for numbers selection
   customPeriodTime = moment().set('hour', 7).format();
   pickerRange = [];
 
-  constructor(navParams: NavParams, private navController: NavController) {
+  constructor(navParams: NavParams, private navController: NavController, 
+              private translate: TranslateService) {
 
       // Populating picker range
       for (let i = 0; i < 31; i++) {

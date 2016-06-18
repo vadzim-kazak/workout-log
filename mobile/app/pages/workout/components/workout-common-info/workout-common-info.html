@@ -7,10 +7,9 @@
 
     <ion-item *ngIf="isTemplate()">
         <ion-label>{{'WORKOUT_TYPE' | translate}}</ion-label>
-        <ion-select [(ngModel)]="workout.type" [okText]="'ALERT_OK' | translate" [cancelText]="'ALERT_CANCEL' | translate">
-            <ion-option value="oneTime">{{'WORKOUT_TYPE_ONE_TIME' | translate}}</ion-option>
-            <ion-option value="weekly">{{'WORKOUT_TYPE_WEEKLY' | translate}}</ion-option>
-            <ion-option value="customPeriod">{{'WORKOUT_TYPE_CUSTOM_PERIOD' | translate}}</ion-option>
+        <ion-select [(ngModel)]="workout.type" [okText]="'ALERT_OK' | translate" 
+                                               [cancelText]="'ALERT_CANCEL' | translate">
+            <ion-option *ngFor="#type of workoutTypes" [value]="type.value">{{type.label}}</ion-option>
         </ion-select>
     </ion-item>
 
