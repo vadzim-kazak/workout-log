@@ -25,13 +25,22 @@ export class ScheduleEffects {
 
   populateCalendarMonth(seedDay) {
     seedDay.add(1, 'days'); 
+    let today = moment();
     let result = [];
+    
     for (let i = 0; i < MONTH_SCHEDULE_DAYS; i++) {
+      
       let day = seedDay.subtract(1, 'days');
-      result.push({
+      let scheduleItem = {
         day: moment(day),
         label: day.format('dd, DD')
-      });
+      }
+
+      if (day.isSame(today, 'day')) {
+        scheduleItem.isToday = true;
+      }
+      
+      result.push(scheduleItem);  
     }
 
     return result;

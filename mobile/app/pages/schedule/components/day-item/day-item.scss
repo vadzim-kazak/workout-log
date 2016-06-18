@@ -1,3 +1,9 @@
+.DayItem {
+    @include modifier(today) {
+        color: rgba(color($colors, primary), .85);
+    }
+}
+
 .DayItemWorkout {
     
     @include element(templateHeader){

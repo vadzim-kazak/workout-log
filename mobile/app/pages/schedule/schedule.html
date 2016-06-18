@@ -12,7 +12,7 @@
         <weeks-header [header]="header"></weeks-header>
       </ion-item-divider>
       
-      <ion-item *virtualItem="let item">
+      <ion-item *virtualItem="let item" [class.ScheduleDay--isToday]="item.isToday">
         <day-item [item]="item" 
                   (proceedToWorkout)="proceedToWorkout($event)"
                   (templateActions)="showTemplateActions($event)"></day-item>

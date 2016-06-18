@@ -1,10 +1,11 @@
 <ion-row center>
-   <ion-col width-20 text-left>
+   <ion-col width-20 text-left [class.DayItem--today]="item.isToday">
     {{item.label}}
    </ion-col>    
    <ion-col width-80 text-center>
         
         <div *ngFor="let workout of item.workouts">
+             
              <ion-card (click)="proceedToWorkout.emit({workout:workout,day:item.day})" 
                        class="DayItemWorkout"
                        *ngIf="workout.state !== 'deleted'">
