@@ -60,7 +60,7 @@ export class Exercises {
   
   searchExercises($event) {
      this.store.dispatch({type: 'UPDATE_EXERCISES_SEARCH_QUERY', 
-                          payload:  $event.value})
+                          payload:  $event.target.value})
   }
   
   completeExerciseSelectionHandler() {

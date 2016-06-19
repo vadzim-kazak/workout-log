@@ -6,7 +6,10 @@ export class ExercisesFilteringService {
     searchByQuery(rawExercises, searchQuery, filterQuery) {
       
         let excludedCategories = Object.keys(filterQuery);
-        
+        if (!searchQuery) {
+            searchQuery = '';
+        }
+
         let exercises = [];
         if (excludedCategories.length > 0) {
               

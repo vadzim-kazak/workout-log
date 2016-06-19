@@ -37,7 +37,7 @@ export class ScheduleEffects {
       }
 
       if (day.isSame(today, 'day')) {
-        scheduleItem.isToday = true;
+        scheduleItem['isToday'] = true;
       }
       
       result.push(scheduleItem);  
