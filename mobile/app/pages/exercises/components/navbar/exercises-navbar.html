@@ -4,6 +4,7 @@
     <div *ngIf="isSearchActive">
         <ion-searchbar (ionInput)="searchExercises.emit($event)"
                        (ionCancel)="toggleSearchMode()"
+                       showCancelButton="true"
                        [placeholder]="'NAVBAR_SEARCH_PLACEHOLDER' | translate"> 
         </ion-searchbar>
     </div>
