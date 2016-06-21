@@ -64,7 +64,8 @@ export class WorkoutsActionsProvider {
                 this.createEditButton('WORKOUT_TEMPLATE_ACTIONS_EDIT_CURRENT', () => {
                     let workoutToProceed = Object.assign({}, workout);
                     workoutToProceed.templateId = workoutToProceed.id; 
-                   // workoutToProceed.template = workout;
+                    workoutToProceed.parent = Object.assign({}, workout);
+                    workoutToProceed.parent.startDate = day.format();
                     delete workoutToProceed.id;
                     workoutToProceed.type = 'oneTime';
                     workoutToProceed.startDate = day.format();

@@ -10,6 +10,8 @@ import {WorkoutCommonInfo} from './components/workout-common-info/workout-common
 import {WorkoutExercisesHeader} from './components/exercises-header/exercises-header.component';
 import {ExercisesList} from '../../common/components/exercises-list/exercises-list.component';
 import {StateUpdates} from '@ngrx/effects'
+// Util
+import {equals} from '../../common/util/compare-objects';
 // Reducers
 import {workoutReducer} from './reducers/workout.reducer';
 // Effects
@@ -37,6 +39,8 @@ export class Workout {
     startDate: moment().format(),
     customPeriod: 7 
   };
+  initialWorkout: any;
+  
 
   toolbarTitle: string;  
   exercisesSelected: Observable<any>;
@@ -49,6 +53,7 @@ export class Workout {
               private workoutActionsProvider: WorkoutActionsProvider,
               workoutNameGenerator: WorkoutNameGenerator) {
       
+      this.exercisesSelected = store.select('exercisesSelected'); 
       let providedWorkout = navParams.get('workout');
       if (providedWorkout) {
         this.isCustomNameSet = true;
@@ -58,6 +63,10 @@ export class Workout {
         if (this.workout.state === 'template') {
           // Workout edit mode
           this.store.dispatch({type: 'EXERCISES_SELECTION_POPULATE', payload: this.workout.exercises});
+          this.initialWorkout = Object.assign({}, providedWorkout);
+          
+        } else {
+          // Workout active mode
         } 
 
       } else {
@@ -66,7 +75,7 @@ export class Workout {
         this.store.dispatch({type: 'EXERCISES_SELECTION_RESET'});
       }
 
-      this.exercisesSelected = store.select('exercisesSelected');  
+      // Workout name generation logic
       this.subscriptions.push(this.exercisesSelected.subscribe(
         exercises => {
           if (!this.isCustomNameSet) {
@@ -104,13 +113,32 @@ export class Workout {
     this.exercisesSelected.subscribe(selectedExercises => this.workout.exercises = selectedExercises)
                           .unsubscribe();
 
-    if (this.workout.id) {
-        // Workout edit flow
+    
+    // Proceed only in case of some changes in workout 
+    if (!(this.initialWorkout && equals(this.initialWorkout, this.workout))) {
+
+       if (this.workout.id) {
+        // Workout edit flow of some oneTime workout or all workouts of some type
         this.store.dispatch({type: 'WORKOUT_UPDATE', payload: this.workout});
-    } else {
-        // Workout create flow or edit of some particular periodic workout
-        this.store.dispatch({type: 'WORKOUT_CREATE', payload: this.workout});
+       } else {
+          // Workout create flow or edit of some particular periodic workout
+          this.store.dispatch({type: 'WORKOUT_CREATE', payload: this.workout});
+          let parent = this.workout.parent; 
+          // Edit of some particular periodic workout
+          if (parent && !moment(this.workout.startDate).isSame(parent.startDate, 'day')) {
+            // Some particular periodic timeout has been moved to some other day.
+            // We need to create some oneTime deleted workout and put it to the original day
+            // in order to not populate it one more time by original periodic workout 
+            let deletedWorkout = Object.assign({}, parent);
+            deletedWorkout.type = 'oneTime';
+            deletedWorkout.templateId = parent.id;
+            deletedWorkout.state = 'deleted';
+            this.store.dispatch({type: 'WORKOUT_CREATE', payload: deletedWorkout});  
+          }
+       } 
+
     }
+    
     
     this.navController.pop();
   }
@@ -118,7 +146,7 @@ export class Workout {
   checkCustomNameProvision() {
     this.isCustomNameSet = this.workout.name.length > 0;
   }
-  
+
   ngOnDestroy() {
     // Manually unsubscribe effect
     this.subscriptions.forEach(subscription => {

@@ -14,7 +14,6 @@ export class WorkoutCommonInfo {
   // Default workout object
   @Input() workout: any = {};
   @Output() nameInputBlurEvent = new EventEmitter();
-  @Output() workoutChangedEvent = new EventEmitter();
 
   dayShortNames = moment.weekdaysMin();
   monthNames = moment.months().map(month => month.charAt(0).toUpperCase() + month.slice(1));
@@ -48,8 +47,4 @@ export class WorkoutCommonInfo {
     return this.workout.state === 'template';
   }
 
-  // ngOnChanges(changes: any) {
-  //   this.workoutChangedEvent.emit(null);
-  // }
-  
 }
