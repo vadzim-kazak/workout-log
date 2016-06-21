@@ -16,6 +16,7 @@ import {workoutReducer} from './reducers/workout.reducer';
 import {WorkoutEffects} from './effects/workouts-manager.effect';
 // Services
 import {WorkoutActionsProvider} from './services/workout-actions.provider';
+import {WorkoutNameGenerator} from './services/workout-name.generator';
 
 export const reducers = {
     workouts: workoutReducer
@@ -25,7 +26,7 @@ export const reducers = {
   templateUrl: 'build/pages/workout/workout.html',
   directives: [Toolbar, WorkoutCommonInfo, WorkoutExercisesHeader, ExercisesList],
   pipes: [TranslatePipe],
-  providers: [WorkoutEffects, StateUpdates, WorkoutActionsProvider]
+  providers: [WorkoutEffects, StateUpdates, WorkoutActionsProvider, WorkoutNameGenerator]
 })
 export class Workout {
   
@@ -45,7 +46,8 @@ export class Workout {
   constructor(navParams: NavParams, private navController: NavController, 
               private store: Store<any>, public platform: Platform,
               private translate: TranslateService, workoutEffects: WorkoutEffects,
-              private workoutActionsProvider: WorkoutActionsProvider) {
+              private workoutActionsProvider: WorkoutActionsProvider,
+              workoutNameGenerator: WorkoutNameGenerator) {
       
       let providedWorkout = navParams.get('workout');
       if (providedWorkout) {
@@ -65,7 +67,12 @@ export class Workout {
       }
 
       this.exercisesSelected = store.select('exercisesSelected');  
-      this.subscriptions.push(this.exercisesSelected.subscribe(this.generateWorkoutName));  
+      this.subscriptions.push(this.exercisesSelected.subscribe(
+        exercises => {
+          if (!this.isCustomNameSet) {
+            this.workout.name = workoutNameGenerator.generate(exercises);
+          }
+        }));  
       this.subscriptions.push(workoutEffects.save$.subscribe(store));
   }
 
@@ -109,33 +116,7 @@ export class Workout {
   }
 
   checkCustomNameProvision() {
-    if (this.workout.name.length > 0) {
-      this.isCustomNameSet = true;
-    } else {
-      this.isCustomNameSet = false;
-    }
-  }
-
-  generateWorkoutName = (exercises) => {
-    
-    if (exercises.length > 0 && !this.isCustomNameSet) {
-        let uniqueMusclesSet = new Set();
-        exercises.forEach(current => {
-          if (current.mainMuscles && current.mainMuscles.length > 0) {
-            uniqueMusclesSet.add(current.mainMuscles[0].toUpperCase());
-          }
-        });
-
-        // Convert set to array
-        let uniqueMuscles = [];
-        uniqueMusclesSet.forEach(muscle => uniqueMuscles.push(muscle));
-        
-        this.workout.name = uniqueMuscles.map(muscle => {
-                                            let translated = this.translate.instant(muscle + '_SHORT')
-                                            return translated.charAt(0).toUpperCase() + translated.slice(1); 
-                                         })
-                                         .join(', ');
-    }
+    this.isCustomNameSet = this.workout.name.length > 0;
   }
   
   ngOnDestroy() {
