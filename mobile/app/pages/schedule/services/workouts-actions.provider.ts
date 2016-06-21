@@ -62,12 +62,13 @@ export class WorkoutsActionsProvider {
             buttons.push(
                 // Handling edit of some particular periodic workout
                 this.createEditButton('WORKOUT_TEMPLATE_ACTIONS_EDIT_CURRENT', () => {
-                    let workoutCopy = Object.assign({}, workout);
-                    workoutCopy.templateId = workoutCopy.id; 
-                    delete workoutCopy.id;
-                    workoutCopy.type = 'oneTime';
-                    workoutCopy.startDate = day.format();
-                    this.navController.push(Workout, {workout:workoutCopy});
+                    let workoutToProceed = Object.assign({}, workout);
+                    workoutToProceed.templateId = workoutToProceed.id; 
+                   // workoutToProceed.template = workout;
+                    delete workoutToProceed.id;
+                    workoutToProceed.type = 'oneTime';
+                    workoutToProceed.startDate = day.format();
+                    this.navController.push(Workout, {workout:workoutToProceed});
                 })  
             );
             

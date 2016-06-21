@@ -30,6 +30,6 @@
 
 .ScheduleDay {
     @include modifier(isToday){
-        background: rgba(color($colors, favorite), .2);
+        background: rgba(color($colors, favorite), .07);
     }    
 }

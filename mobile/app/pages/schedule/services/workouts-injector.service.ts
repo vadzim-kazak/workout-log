@@ -88,7 +88,7 @@ export class WorkoutsInjectorService {
                     return true;
                 }
 
-                // Delete template case
+                // Deleted template case
                 if (current.templateId && current.templateId === workout.id) {
                     return true;
                 }

@@ -9,7 +9,7 @@
         <ion-label>{{'WORKOUT_TYPE' | translate}}</ion-label>
         <ion-select [(ngModel)]="workout.type" [okText]="'ALERT_OK' | translate" 
                                                [cancelText]="'ALERT_CANCEL' | translate">
-            <ion-option *ngFor="#type of workoutTypes" [value]="type.value">{{type.label}}</ion-option>
+            <ion-option *ngFor="let type of workoutTypes" [value]="type.value">{{type.label}}</ion-option>
         </ion-select>
     </ion-item>
 

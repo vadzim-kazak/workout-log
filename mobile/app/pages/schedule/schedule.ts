@@ -96,6 +96,7 @@ export class Schedule {
       workoutToProceed = Object.assign({}, workout);
       workoutToProceed.state = 'active';
       workoutToProceed.startDate = moment(day).format();
+      workoutToProceed.template = workout;
     }
     this.navController.push(Workout, {workout: workoutToProceed});  
   }

@@ -52,10 +52,10 @@ export class Exercises {
       this.subscriptions.push(exercisesEffects.load$.subscribe(store));
       this.store.dispatch({type: 'LOAD_EXERCISES'});
 
-      let worklightCreationFlowParam = navParams.get('isWorkoutCreationFlow');
-      if (worklightCreationFlowParam) {
+      let workoutCreationFlowParam = navParams.get('isWorkoutCreationFlow');
+      if (workoutCreationFlowParam) {
           this.isWorkoutCreationFlow = true;
-      } 
+      }
   }
   
   searchExercises($event) {

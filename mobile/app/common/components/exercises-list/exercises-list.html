@@ -10,9 +10,15 @@
             
             <exercises-list-item [exercise]="exercise" 
                                  [isWorkoutCreationFlow]="isWorkoutCreationFlow"
-                                 [isSelected]="checkExerciseSelection(exercise.id)"
                                  (exerciseSelect)="selectExercise(exercise)"
                                  (exerciseUnselect)="unselectExercise(exercise)"></exercises-list-item>  
+
+            <!--<exercises-list-item [exercise]="exercise" 
+                                 [isWorkoutCreationFlow]="isWorkoutCreationFlow"
+                                 [isSelected]="checkExerciseSelection(exercise)"
+                                 (exerciseSelect)="selectExercise(exercise)"
+                                 (exerciseUnselect)="unselectExercise(exercise)"></exercises-list-item>-->
+
         </ion-item>
   </ion-list>
 </ion-content>

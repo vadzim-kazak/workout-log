@@ -22,14 +22,22 @@ export class ExercisesList {
   @Input() showActionButton: boolean = true;
   @Input() exercises: Observable<any>;
   @Output() completeExerciseSelection = new EventEmitter();
+ 
   exercisesSelected: Observable<any>;
+  exercisesSelectedIds:string[];
   exerciseSelect = new EventEmitter();
   exerciseUnselect = new EventEmitter();
     
+  subscriptions: any[] = [];
+
   constructor(private translate: TranslateService, private store: Store<any>) {
        this.exercisesSelected = store.select('exercisesSelected');
+      //  this.subscriptions.push(
+      //    this.exercisesSelected.subscribe(selectedExercises => {
+      //      this.exercisesSelectedIds = selectedExercises.map(exercise => exercise.id); 
+      //   }));
   }
-  
+
   exerciseGroupHeader = (exercise, exerciseIndex, exercises) => {
       
       if (exerciseIndex > 0) {
@@ -45,16 +53,9 @@ export class ExercisesList {
       return null;
   }
 
-  checkExerciseSelection(exerciseId) {
-    let isExercisesSelected = false;
-    this.exercisesSelected.subscribe(exercises => {
-      if (exercises.some(exercise => exercise.id === exerciseId)) {
-        isExercisesSelected = true;
-      }
-    }).unsubscribe();
-
-    return isExercisesSelected;
-  }
+  // checkExerciseSelection(exercise) {
+  //   return this.exercisesSelectedIds.some(id => id === exercise.id);
+  // }
 
   selectExercise(exercise) {
     this.store.dispatch({type: 'EXERCISE_SELECT', 
@@ -68,6 +69,10 @@ export class ExercisesList {
 
   getTranslateValue = (value) => {
      return this.translate.instant(value.toUpperCase());    
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
   
 }

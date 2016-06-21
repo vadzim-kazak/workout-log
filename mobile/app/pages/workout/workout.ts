@@ -40,8 +40,6 @@ export class Workout {
   toolbarTitle: string;  
   exercisesSelected: Observable<any>;
   isCustomNameSet: boolean = false;
-  isWorkoutCreationFlow: boolean = true;
-
   subscriptions: Subscription[] = [];
 
   constructor(navParams: NavParams, private navController: NavController, 
@@ -49,20 +47,15 @@ export class Workout {
               private translate: TranslateService, workoutEffects: WorkoutEffects,
               private workoutActionsProvider: WorkoutActionsProvider) {
       
-      this.exercisesSelected = store.select('exercisesSelected');  
-      this.exercisesSelected.subscribe(bla => console.log(bla));
-
       let providedWorkout = navParams.get('workout');
       if (providedWorkout) {
         this.isCustomNameSet = true;
-        
         this.workout = providedWorkout;
         this.toolbarTitle = providedWorkout.name;
-        this.isWorkoutCreationFlow = false;
 
         if (this.workout.state === 'template') {
           // Workout edit mode
-          this.store.dispatch({type: 'EXERCISES_SELECTION_POPULATE', payload:this.workout.exercises});
+          this.store.dispatch({type: 'EXERCISES_SELECTION_POPULATE', payload: this.workout.exercises});
         } 
 
       } else {
@@ -71,6 +64,7 @@ export class Workout {
         this.store.dispatch({type: 'EXERCISES_SELECTION_RESET'});
       }
 
+      this.exercisesSelected = store.select('exercisesSelected');  
       this.subscriptions.push(this.exercisesSelected.subscribe(this.generateWorkoutName));  
       this.subscriptions.push(workoutEffects.save$.subscribe(store));
   }
