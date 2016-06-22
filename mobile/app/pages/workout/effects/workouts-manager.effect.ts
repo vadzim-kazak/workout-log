@@ -12,7 +12,7 @@ export class WorkoutEffects {
 
   @Effect() 
   save$ = this.updates$
-          .whenAction('WORKOUT_CREATE', 'WORKOUT_DELETE')
+          .whenAction('WORKOUT_CREATE', 'WORKOUT_UPDATE', 'WORKOUT_DELETE')
           .map(payload => {
             let {workouts} = payload.state; 
             this.objectLocalStorage.set(STORAGE_WORKOUTS_KEY, workouts); 
