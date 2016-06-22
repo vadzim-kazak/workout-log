@@ -89,13 +89,15 @@ export class Workout {
   completeWorkoutCreation() {
 
     let today = moment(); 
-    if (today.isSame(this.workout.startDate, 'day') || (this.providedScheduleDay && today.isSame(this.providedScheduleDay))) {
+    if (today.isSame(this.workout.startDate, 'day') || // Create flow case
+       (today.isSame(this.providedScheduleDay))) { // Edit flow case 
       
       // Workout has been created for today or starting from current day.
       // So, there can be some options just to save workout or save & start it immediately
       this.proposeCompleteWorkoutActions();
 
-    } else if(today.isBefore(this.workout.startDate, 'day') || (this.providedScheduleDay && today.isBefore(this.providedScheduleDay, 'day'))){
+    } else if(today.isBefore(this.workout.startDate, 'day') || // Create flow case
+             (today.isBefore(this.providedScheduleDay, 'day'))) {   // Edit flow case
 
       // Workout starting date in future. So, just saving workout and exit 
       this.saveWorkout();
