@@ -40,6 +40,7 @@ export class Workout {
     customPeriod: 7 
   };
   initialWorkout: any;
+  providedScheduleDay: any;
   
 
   toolbarTitle: string;  
@@ -64,7 +65,7 @@ export class Workout {
           // Workout edit mode
           this.store.dispatch({type: 'EXERCISES_SELECTION_POPULATE', payload: this.workout.exercises});
           this.initialWorkout = Object.assign({}, providedWorkout);
-          
+          this.providedScheduleDay = navParams.get('day');
         } else {
           // Workout active mode
         } 
@@ -88,13 +89,13 @@ export class Workout {
   completeWorkoutCreation() {
 
     let today = moment(); 
-    if (today.isSame(this.workout.startDate, 'day')) {
+    if (today.isSame(this.workout.startDate, 'day') || (this.providedScheduleDay && today.isSame(this.providedScheduleDay))) {
       
       // Workout has been created for today or starting from current day.
       // So, there can be some options just to save workout or save & start it immediately
       this.proposeCompleteWorkoutActions();
 
-    } else if(today.isBefore(this.workout.startDate, 'day')){
+    } else if(today.isBefore(this.workout.startDate, 'day') || (this.providedScheduleDay && today.isBefore(this.providedScheduleDay, 'day'))){
 
       // Workout starting date in future. So, just saving workout and exit 
       this.saveWorkout();

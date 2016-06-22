@@ -53,7 +53,7 @@ export class WorkoutsActionsProvider {
             buttons.push(
                 // Handling one time workout edit 
                 this.createEditButton('WORKOUT_TEMPLATE_ACTIONS_EDIT', () => {
-                    this.navController.push(Workout, {workout});
+                    this.navController.push(Workout, {workout, day});
                 })  
             );
 
@@ -69,14 +69,14 @@ export class WorkoutsActionsProvider {
                     delete workoutToProceed.id;
                     workoutToProceed.type = 'oneTime';
                     workoutToProceed.startDate = day.format();
-                    this.navController.push(Workout, {workout:workoutToProceed});
+                    this.navController.push(Workout, {workout:workoutToProceed, day});
                 })  
             );
             
             buttons.push(
                 // Handling edit of all periodic workouts of some type
                 this.createEditButton('WORKOUT_TEMPLATE_ACTIONS_EDIT_ALL', () => {
-                     this.navController.push(Workout, {workout});
+                     this.navController.push(Workout, {workout, day});
                 })  
             );
         }
