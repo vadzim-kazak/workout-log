@@ -1,0 +1,41 @@
+<toolbar [title]="exercise.name"></toolbar>
+
+<ion-content>
+
+       
+        
+            <ion-row center>
+                    <ion-col *ngFor="let metric of exercise.metrics">
+                        <ion-item>
+                            
+                            <ion-input type="number" [placeholder]="('METRIC_CATEGORY_' + metric.category.toUpperCase()) | translate" value="record[metric.category].value"></ion-input>
+                                                    
+                            <ion-select *ngIf="isMultiCategoryValues(metric.category)" 
+                                        [alertOptions]="{title: ('METRIC_CATEGORY_SELECTION_LABEL_' + metric.category.toUpperCase()) | translate}"
+                                        [(ngModel)]="record[metric.category].metric"
+                                        [okText]="'ALERT_OK' | translate" [cancelText]="'ALERT_CANCEL' | translate" >
+                                <ion-option *ngFor="let metricValue of getCategoryValues(metric.category)" [value]="metricValue.value">
+                                    {{'SHORT_METRIC_' + metricValue.value | translate}}
+                                </ion-option>
+                            </ion-select>
+
+                            <ion-label *ngIf="!isMultiCategoryValues(metric.category)" style="order: 1;color: black">
+                                {{'SHORT_METRIC_' + getCategoryValues(metric.category)[0].value.toUpperCase() | translate}}
+                            </ion-label>
+
+                        </ion-item>                                
+                    </ion-col>
+            </ion-row>
+        
+        
+        <!--<ion-item>
+            <ion-textarea [placeholder]="'Comment'"></ion-textarea>
+        </ion-item>-->
+        
+
+</ion-content>
+
+<button primary fab fab-right fab-bottom style="z-index:100">
+    <ion-icon name="checkmark"></ion-icon>
+</button>
+    

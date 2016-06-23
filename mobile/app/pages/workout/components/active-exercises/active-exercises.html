@@ -1,0 +1,32 @@
+<ion-content>
+
+   <ion-list no-lines>
+        
+        <ion-item *ngFor="let exercise of exercises">
+            
+            <ion-card>
+    
+                    <ion-card-header class="ExerciseItem-header" (click)="showExerciseDescription(exercise)">
+                        <ion-row center> 
+                            <ion-col class="ExerciseItemHeader-name" width-80>
+                                {{exercise.name}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-header>
+                    
+                    <ion-row>
+                       <ion-col text-left>
+                            <button secondary clear (click)="forwardToExerciseRecords(exercise)">
+                                <ion-icon name="add"></ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>                        
+                    
+                    
+           </ion-card>
+
+        </ion-item>
+        
+   </ion-list>
+
+</ion-content>    

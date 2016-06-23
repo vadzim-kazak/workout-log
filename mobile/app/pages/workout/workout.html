@@ -11,9 +11,13 @@
                     isWorkoutCreationFlow="true"
                     showActionButton="false"></exercises-list>
 
+    <active-exercises *ngIf="workout.state === 'active'"
+                      [exercises]="workout.exercises">
+    </active-exercises>                    
+
 </ion-content>   
 
-<button *ngIf="(exercisesSelected | async).length > 0" 
+<button *ngIf="(exercisesSelected | async).length > 0 && workout.state === 'template'" 
          class="Workout-complete" primary fab fab-right fab-bottom
         (click)="completeWorkoutCreation()">
     <ion-icon name="done-all"></ion-icon>

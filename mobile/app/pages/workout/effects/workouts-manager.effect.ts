@@ -33,6 +33,6 @@ export class WorkoutEffects {
 
                             return  {type: 'WORKOUTS_LOAD_SUCCESS', payload:result};
                         })
-                        .catch(() => Observable.of({ type: 'WORKOUTS_LOAD_SUCCESS_FAILED' }))
+                        .catch(() => Observable.of({ type: 'WORKOUTS_LOAD_FAILURE' }))
           );
 }

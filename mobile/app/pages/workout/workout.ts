@@ -4,31 +4,36 @@ import {Store} from '@ngrx/store';
 import * as moment from 'moment';
 import {TranslatePipe, TranslateService} from 'ng2-translate/ng2-translate';
 import {NavController, NavParams, ActionSheet, Platform} from 'ionic-angular';
+import {StateUpdates} from '@ngrx/effects'
+// Components
 import {Toolbar} from '../../common/components/toolbar/toolbar.component';
 import {Exercises} from '../exercises/exercises';
 import {WorkoutCommonInfo} from './components/workout-common-info/workout-common-info.component';
 import {WorkoutExercisesHeader} from './components/exercises-header/exercises-header.component';
 import {ExercisesList} from '../../common/components/exercises-list/exercises-list.component';
-import {StateUpdates} from '@ngrx/effects'
+import {ActiveExercises} from './components/active-exercises/active-exercises.component.ts';
 // Util
 import {equals} from '../../common/util/compare-objects';
 // Reducers
 import {workoutReducer} from './reducers/workout.reducer';
+import {untisOfMeasuresReducer} from './reducers/units-of-measures.reducer';
 // Effects
 import {WorkoutEffects} from './effects/workouts-manager.effect';
+import {UnitsOfMeasuresEffects} from './effects/units-of-measure-load.effect';
 // Services
 import {WorkoutActionsProvider} from './services/workout-actions.provider';
 import {WorkoutNameGenerator} from './services/workout-name.generator';
 
 export const reducers = {
-    workouts: workoutReducer
+    workouts: workoutReducer,
+    unitsOfMeasures: untisOfMeasuresReducer
 }
 
 @Component({
   templateUrl: 'build/pages/workout/workout.html',
-  directives: [Toolbar, WorkoutCommonInfo, WorkoutExercisesHeader, ExercisesList],
+  directives: [Toolbar, WorkoutCommonInfo, WorkoutExercisesHeader, ExercisesList, ActiveExercises],
   pipes: [TranslatePipe],
-  providers: [WorkoutEffects, StateUpdates, WorkoutActionsProvider, WorkoutNameGenerator]
+  providers: [WorkoutEffects, StateUpdates, WorkoutActionsProvider, WorkoutNameGenerator, UnitsOfMeasuresEffects]
 })
 export class Workout {
   
@@ -51,6 +56,7 @@ export class Workout {
   constructor(navParams: NavParams, private navController: NavController, 
               private store: Store<any>, public platform: Platform,
               private translate: TranslateService, workoutEffects: WorkoutEffects,
+              unitsOfMeasuresEffects: UnitsOfMeasuresEffects,
               private workoutActionsProvider: WorkoutActionsProvider,
               workoutNameGenerator: WorkoutNameGenerator) {
       
@@ -84,6 +90,14 @@ export class Workout {
           }
         }));  
       this.subscriptions.push(workoutEffects.save$.subscribe(store));
+      this.subscriptions.push(unitsOfMeasuresEffects.load$.subscribe(store));
+      
+      this.store.select('unitsOfMeasures').subscribe(units => {
+        if (Object.keys(units).length === 0) {
+          this.store.dispatch({type: 'LOAD_UNITS_OF_MEASURES'});
+        }
+      }).unsubscribe();
+
   }
 
   completeWorkoutCreation() {
